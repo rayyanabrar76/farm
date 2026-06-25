@@ -5,129 +5,93 @@ interface Props {
   height?: number;
 }
 
-export default function Logo({ variant = "full", onDark = false, className, height = 40 }: Props) {
-  const textPrimary = onDark ? "#ffffff" : "#1B5E28";
-  const taglineColor = onDark ? "rgba(255,255,255,0.45)" : "#4CAF72";
+export default function Logo({ variant = "full", onDark = false, className, height = 44 }: Props) {
+  const wordColor  = onDark ? "#ffffff"            : "#111827";
+  const accentWord = onDark ? "#4CAF72"            : "#2D7A3A";
+  const tagColor   = onDark ? "rgba(255,255,255,0.42)" : "#6B7280";
 
-  const IconMark = (
+  /* ── Icon mark — rounded-square badge with sprouting leaf ── */
+  const Badge = (
     <g>
-      {/* Outer glow ring */}
-      <circle cx="48" cy="48" r="44" fill="none" stroke="#4CAF72" strokeWidth="0.8" opacity="0.20" />
-      {/* Badge */}
-      <circle cx="48" cy="48" r="40" fill="url(#agrl-bg)" />
-      {/* Inner ring */}
-      <circle cx="48" cy="48" r="33" fill="none" stroke="rgba(255,255,255,0.07)" strokeWidth="1.5" />
+      <defs>
+        <linearGradient id="lg-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%"   stopColor="#3CB96B" />
+          <stop offset="100%" stopColor="#145E30" />
+        </linearGradient>
+        <linearGradient id="lg-leaf" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%"   stopColor="#ffffff" stopOpacity="1" />
+          <stop offset="100%" stopColor="rgba(255,255,255,0.7)" stopOpacity="0.7" />
+        </linearGradient>
+      </defs>
 
-      {/* Leaf outline */}
-      <path
-        d="M48 80 C22 72 17 26 48 12 C79 26 74 72 48 80Z"
-        fill="rgba(255,255,255,0.08)"
-        stroke="rgba(255,255,255,0.28)"
-        strokeWidth="1.5"
-      />
-      {/* Leaf central vein */}
-      <line
-        x1="48" y1="78" x2="48" y2="15"
-        stroke="rgba(255,255,255,0.14)"
-        strokeWidth="1"
-        strokeDasharray="2 4"
-        strokeLinecap="round"
-      />
+      {/* Badge background — rounded square */}
+      <rect x="2" y="2" width="92" height="92" rx="22" fill="url(#lg-bg)" />
 
-      {/* Y-network from hub */}
-      <line x1="48" y1="50" x2="48" y2="23"  stroke="white" strokeWidth="2.2" strokeLinecap="round" opacity="0.92" />
-      <line x1="48" y1="50" x2="31" y2="65"  stroke="white" strokeWidth="2.2" strokeLinecap="round" opacity="0.92" />
-      <line x1="48" y1="50" x2="65" y2="65"  stroke="white" strokeWidth="2.2" strokeLinecap="round" opacity="0.92" />
+      {/* Subtle inner glow ring */}
+      <rect x="2" y="2" width="92" height="92" rx="22"
+        fill="none" stroke="rgba(255,255,255,0.12)" strokeWidth="1.5" />
 
-      {/* Gold nodes at tips */}
-      <circle cx="48" cy="22"  r="5.5" fill="url(#agrl-gd)" />
-      <circle cx="30" cy="66"  r="5.5" fill="url(#agrl-gd)" />
-      <circle cx="66" cy="66"  r="5.5" fill="url(#agrl-gd)" />
+      {/* ── Sprouting leaf mark ── */}
+      {/* Stem */}
+      <line x1="48" y1="76" x2="48" y2="42"
+        stroke="white" strokeWidth="3.5" strokeLinecap="round" />
 
-      {/* Hub ring + dot */}
-      <circle cx="48" cy="50" r="9"   fill="white" />
-      <circle cx="48" cy="50" r="4.5" fill="url(#agrl-bg)" />
+      {/* Left leaf blade */}
+      <path d="M48 56 C38 50 26 50 22 38 C34 34 46 42 48 56 Z"
+        fill="url(#lg-leaf)" />
 
-      {/* Leaf-tip dot */}
-      <circle cx="48" cy="77" r="3" fill="rgba(255,255,255,0.38)" />
+      {/* Right leaf blade */}
+      <path d="M48 46 C58 36 72 32 76 22 C64 20 52 30 48 46 Z"
+        fill="url(#lg-leaf)" />
+
+      {/* Soil/ground dots */}
+      <circle cx="38" cy="79" r="3"   fill="rgba(255,255,255,0.35)" />
+      <circle cx="48" cy="81" r="3.5" fill="rgba(255,255,255,0.5)"  />
+      <circle cx="58" cy="79" r="3"   fill="rgba(255,255,255,0.35)" />
     </g>
   );
 
+  /* ── Icon-only variant ── */
   if (variant === "icon") {
-    const h = height;
-    const w = height;
     return (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
+      <svg xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 96 96"
-        width={w}
-        height={h}
-        fill="none"
-        aria-label="Agrolync icon"
-        className={className}
-      >
-        <defs>
-          <linearGradient id="agrl-bg" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#3DA05E" />
-            <stop offset="100%" stopColor="#135120" />
-          </linearGradient>
-          <linearGradient id="agrl-gd" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#FFD17A" />
-            <stop offset="100%" stopColor="#CC8300" />
-          </linearGradient>
-        </defs>
-        {IconMark}
+        width={height} height={height}
+        fill="none" aria-label="Agrolync" className={className}>
+        {Badge}
       </svg>
     );
   }
 
-  /* full lockup — aspect ratio 420:96 */
-  const w = Math.round((height / 96) * 420);
+  /* ── Full lockup ── */
+  const w = Math.round((height / 96) * 380);
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 420 96"
-      width={w}
-      height={height}
-      fill="none"
-      aria-label="Agrolync logo"
-      className={className}
-    >
-      <defs>
-        <linearGradient id="agrl-bg" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#3DA05E" />
-          <stop offset="100%" stopColor="#135120" />
-        </linearGradient>
-        <linearGradient id="agrl-gd" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#FFD17A" />
-          <stop offset="100%" stopColor="#CC8300" />
-        </linearGradient>
-      </defs>
-
-      {IconMark}
+    <svg xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 380 96"
+      width={w} height={height}
+      fill="none" aria-label="Agrolync logo" className={className}>
+      {Badge}
 
       {/* Wordmark */}
       <text
-        x="106"
-        y="59"
-        fontFamily="system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif"
-        fontSize="44"
+        x="112" y="56"
+        fontFamily="system-ui,-apple-system,'Segoe UI',sans-serif"
+        fontSize="46"
         fontWeight="800"
-        letterSpacing="-2"
-        fill={textPrimary}
+        letterSpacing="-1.5"
+        fill={wordColor}
       >
-        Agro<tspan fill="#F5A623">lync</tspan>
+        agro<tspan fill={accentWord}>lync</tspan>
       </text>
 
       {/* Tagline */}
       <text
-        x="108"
-        y="77"
-        fontFamily="system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif"
-        fontSize="10"
-        fontWeight="700"
-        letterSpacing="4"
-        fill={taglineColor}
+        x="113" y="76"
+        fontFamily="system-ui,-apple-system,'Segoe UI',sans-serif"
+        fontSize="10.5"
+        fontWeight="600"
+        letterSpacing="3.5"
+        fill={tagColor}
       >
         FARM TO MARKET · AFRICA
       </text>

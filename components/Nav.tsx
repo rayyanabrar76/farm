@@ -28,7 +28,7 @@ export default function Nav() {
 
           {/* Logo */}
           <Link href="/" className="flex items-center select-none" aria-label="Agrolync home">
-            <Logo height={38} />
+            <Logo height={48} />
           </Link>
 
           {/* Desktop links */}
