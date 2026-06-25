@@ -29,23 +29,23 @@ export default function ProductCard({ product: p }: Props) {
 
   return (
     <div className="flex flex-col">
-      {/* ── Card image area (Arena Club portrait style) ── */}
-      <Link href={`/marketplace/${p.id}`} className="group block relative rounded-2xl overflow-hidden mb-3"
+      {/* Image area */}
+      <Link href={`/marketplace/${p.id}`} className="group block relative rounded-2xl overflow-hidden mb-2 sm:mb-3"
         style={{ aspectRatio: "3/4", background: CARD_BG[p.category] ?? CARD_BG.Vegetables }}>
 
-        {/* Badge chip — top left */}
+        {/* Badge — top left */}
         {p.badge && (
-          <div className="absolute top-3 left-3 z-10">
-            <span className="text-[11px] font-bold text-white bg-black/35 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/12">
+          <div className="absolute top-2 left-2 sm:top-3 sm:left-3 z-10">
+            <span className="text-[10px] sm:text-[11px] font-bold text-white bg-black/35 backdrop-blur-md px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full border border-white/12">
               {p.badge}
             </span>
           </div>
         )}
 
-        {/* Verified chip — top right */}
+        {/* Verified — top right */}
         {p.verified && (
-          <div className="absolute top-3 right-3 z-10 flex items-center gap-1 text-[10px] font-bold text-white bg-primary-600/70 backdrop-blur-md px-2 py-1 rounded-full">
-            <ShieldCheck size={9} /> Verified
+          <div className="absolute top-2 right-2 sm:top-3 sm:right-3 z-10 flex items-center gap-1 text-[9px] sm:text-[10px] font-bold text-white bg-primary-600/70 backdrop-blur-md px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full">
+            <ShieldCheck size={8} /> <span className="hidden xs:inline">Verified</span>
           </div>
         )}
 
@@ -58,8 +58,17 @@ export default function ProductCard({ product: p }: Props) {
           onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
         />
 
-        {/* Bottom gradient + Add to Cart on hover */}
-        <div className="absolute bottom-0 inset-x-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 p-3"
+        {/* Mobile: always-visible cart button (bottom-right corner) */}
+        <button
+          onClick={handleAdd}
+          className="sm:hidden absolute bottom-2 right-2 z-10 w-8 h-8 rounded-full bg-white shadow-lg flex items-center justify-center text-gray-900 hover:bg-accent-400 transition-colors"
+          aria-label="Add to cart"
+        >
+          <ShoppingCart size={13} />
+        </button>
+
+        {/* Desktop: hover-reveal Add to Cart bar */}
+        <div className="hidden sm:block absolute bottom-0 inset-x-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 p-3"
           style={{ background: "linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 100%)" }}>
           <button
             onClick={handleAdd}
@@ -70,16 +79,16 @@ export default function ProductCard({ product: p }: Props) {
         </div>
       </Link>
 
-      {/* ── Info below card (Arena Club style) ── */}
+      {/* Info */}
       <Link href={`/marketplace/${p.id}`} className="block px-0.5">
-        <h3 className="font-bold text-gray-900 text-sm leading-tight">{p.name}</h3>
-        <p className="text-gray-400 text-xs mt-0.5 flex items-center gap-1 truncate">
-          <MapPin size={10} className="shrink-0" />
+        <h3 className="font-bold text-gray-900 text-xs sm:text-sm leading-tight line-clamp-1">{p.name}</h3>
+        <p className="text-gray-400 text-[10px] sm:text-xs mt-0.5 flex items-center gap-1 truncate">
+          <MapPin size={9} className="shrink-0" />
           {p.farmer} · {p.state}
         </p>
-        <p className="font-black text-gray-900 text-base mt-1.5">
+        <p className="font-black text-gray-900 text-sm sm:text-base mt-1">
           ₦{p.price.toLocaleString()}
-          <span className="text-gray-400 font-normal text-xs ml-0.5">/{p.unit}</span>
+          <span className="text-gray-400 font-normal text-[10px] sm:text-xs ml-0.5">/{p.unit}</span>
         </p>
       </Link>
     </div>

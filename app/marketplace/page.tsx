@@ -81,7 +81,7 @@ export default function MarketplacePage() {
         </div>
 
         {/* Filters row */}
-        <div className="sticky top-16 z-40 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm">
+        <div className="sticky top-25 z-40 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm">
           <div className="max-w-7xl mx-auto px-4 py-3 flex items-center gap-2 overflow-x-auto">
             <button
               onClick={() => setActiveCategory("All")}
@@ -137,7 +137,7 @@ export default function MarketplacePage() {
               </button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-5">
               {filtered.map((p) => <ProductCard key={p.id} product={p} />)}
             </div>
           )}
