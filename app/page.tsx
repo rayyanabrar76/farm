@@ -4,6 +4,7 @@ import { useRef } from "react";
 import Footer from "@/components/Footer";
 import ProductCard from "@/components/ProductCard";
 import HeroSlider from "@/components/HeroSlider";
+import Logo from "@/components/Logo";
 import { PRODUCTS } from "@/lib/data";
 import { ArrowRight, TrendingUp, Shield, Truck, CheckCircle, Wheat, ShoppingCart, Globe2, Zap, Star, ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -307,21 +308,36 @@ export default function HomePage() {
       </section>
 
       {/* ── FOUNDER SECTION ── */}
-      <section className="py-24 px-4 bg-gray-50 border-t border-gray-100">
-        <div className="max-w-3xl mx-auto text-center">
-          <p className="text-xl sm:text-2xl md:text-4xl font-black text-gray-900 mb-4 sm:mb-6 leading-snug">
-            Agrolync was built by Nigerians,<br />for Nigerian farmers.
-          </p>
-          <p className="text-gray-500 text-base sm:text-lg mb-8 sm:mb-14 leading-relaxed max-w-xl mx-auto">
-            For an experience that lives up to the hard work every farmer puts in before dawn every day.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-12">
-            <div className="flex flex-col items-center">
-              <div className="w-16 h-16 rounded-full flex items-center justify-center text-white text-xl font-black mb-3 ring-4 ring-primary-100"
-                style={{ background: "linear-gradient(135deg, #2D7A3A, #1B5E28)" }}>TA</div>
-              <p className="font-bold text-gray-900">Tobi Adeyemo</p>
-              <p className="text-gray-400 text-sm mt-0.5">Founder &amp; CEO</p>
+      <section className="py-16 sm:py-20 px-6 bg-white border-t border-gray-100">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col md:flex-row items-center gap-10 md:gap-16">
+
+            {/* Left — Logo */}
+            <div className="shrink-0">
+              <Logo height={52} />
             </div>
+
+            {/* Center — Text */}
+            <div className="flex-1 text-center md:text-left">
+              <p className="text-base sm:text-lg font-bold text-gray-900 leading-snug">
+                Agrolync was built by Nigerians, for Nigerian farmers.<br />
+                <span className="font-normal text-gray-500">For an experience that lives up to the hard work every farmer puts in before dawn every day.</span>
+              </p>
+            </div>
+
+            {/* Right — Founder */}
+            <div className="shrink-0 flex flex-col items-center text-center">
+              {/* Signature SVG */}
+              <svg viewBox="0 0 160 60" width="160" height="60" fill="none" className="mb-2">
+                <path d="M10 45 C20 20 35 10 50 30 C60 42 65 15 80 25 C92 33 88 48 100 40 C112 32 118 18 135 28 C145 35 150 42 155 38"
+                  stroke="#111827" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                <path d="M30 50 C45 48 55 52 70 49"
+                  stroke="#111827" strokeWidth="1.5" strokeLinecap="round" fill="none" />
+              </svg>
+              <p className="font-bold text-gray-900 text-sm">Tobi Adeyemo</p>
+              <p className="text-gray-400 text-xs mt-0.5">Founder &amp; CEO</p>
+            </div>
+
           </div>
         </div>
       </section>
