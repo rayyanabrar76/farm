@@ -60,7 +60,7 @@ export default function HeroSlider() {
   const Icon = s.ctaIcon;
 
   return (
-    <section className="relative w-full min-h-screen overflow-hidden">
+    <section className="relative w-full overflow-hidden" style={{ height: "clamp(460px, 65vh, 580px)" }}>
 
       {/* ── Full-screen background image ── */}
       <div
@@ -89,7 +89,7 @@ export default function HeroSlider() {
 
       {/* ── Content ── */}
       <div
-        className="relative z-10 min-h-screen flex items-center pt-16"
+        className="relative z-10 h-full flex items-center pt-16"
         style={{ opacity: fading ? 0 : 1, transition: "opacity 0.3s ease" }}
       >
         <div className="max-w-7xl mx-auto px-5 sm:px-10 w-full py-20">
