@@ -165,11 +165,11 @@ export default function HomePage() {
       <section className="py-20 px-4 bg-white border-t border-gray-100 overflow-hidden">
         <div className="max-w-7xl mx-auto">
 
-          {/* Section label + headline — left aligned like Arena Club */}
+          {/* Section label + headline */}
           <div className="mb-10">
             <p className="text-[10px] font-black tracking-[0.22em] text-primary-600 uppercase mb-2">PLATFORM</p>
             <h2 className="text-3xl sm:text-4xl font-black text-gray-900 leading-tight">
-              Buy, sell, and trade<br />farm produce.
+              Agrolync brings the power of the<br />market into every farmer&apos;s hands
             </h2>
           </div>
 
@@ -288,67 +288,71 @@ export default function HomePage() {
             </div>
 
             {/* RIGHT COL: Big phone mockup */}
-            <div className="flex items-center justify-center lg:items-start py-4 lg:py-0">
+            <div className="flex items-center justify-center lg:justify-end py-4 lg:py-0 lg:-mr-4">
               {/* Phone frame */}
-              <div className="relative w-[220px] shrink-0"
+              <div className="relative w-[300px] shrink-0"
                 style={{
-                  background: "#0f0f0f",
-                  borderRadius: "38px",
-                  padding: "10px",
-                  boxShadow: "0 30px 80px rgba(0,0,0,0.25), 0 0 0 1px rgba(255,255,255,0.08)",
+                  background: "#111",
+                  borderRadius: "48px",
+                  padding: "12px",
+                  boxShadow: "0 40px 100px rgba(0,0,0,0.30), 0 0 0 1.5px rgba(255,255,255,0.1), inset 0 0 0 1px rgba(0,0,0,0.9)",
                 }}>
-                {/* Notch */}
-                <div className="absolute top-3.5 left-1/2 -translate-x-1/2 w-16 h-4 bg-black rounded-full z-10 flex items-center justify-center gap-1">
-                  <div className="w-1.5 h-1.5 rounded-full bg-gray-800" />
-                  <div className="w-2 h-2 rounded-full bg-gray-700" />
+                {/* Dynamic Island */}
+                <div className="absolute top-4 left-1/2 -translate-x-1/2 w-20 h-5 bg-black rounded-full z-10 flex items-center justify-center gap-1.5">
+                  <div className="w-2 h-2 rounded-full bg-gray-900" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-gray-800" />
                 </div>
-                {/* Status bar */}
-                <div className="rounded-[30px] overflow-hidden" style={{ background: "#fff" }}>
-                  <div className="h-8 bg-white flex items-end px-3 pb-1 justify-between">
-                    <span className="text-[8px] font-bold text-gray-900">9:41</span>
-                    <span className="text-[8px] text-gray-500 flex gap-0.5 items-center">▌▌▌ ≋ 🔋</span>
+                {/* Screen */}
+                <div className="rounded-[38px] overflow-hidden bg-white">
+                  {/* Status bar */}
+                  <div className="h-10 bg-white flex items-end px-5 pb-1.5 justify-between">
+                    <span className="text-[10px] font-bold text-gray-900">9:41</span>
+                    <span className="text-[9px] text-gray-500">▌▌▌ ᯤ 🔋</span>
                   </div>
-                  {/* App nav */}
-                  <div className="px-3 py-2 border-b border-gray-100 flex items-center justify-between">
-                    <div className="flex items-center gap-1">
-                      <div className="w-5 h-5 rounded-md flex items-center justify-center" style={{ background: "linear-gradient(135deg,#2D7A3A,#1B5E28)" }}>
-                        <span className="text-[6px] font-black text-white">AG</span>
+                  {/* App header */}
+                  <div className="px-4 pb-2 border-b border-gray-100 flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <div className="w-7 h-7 rounded-xl flex items-center justify-center" style={{ background: "linear-gradient(135deg,#2D7A3A,#1B5E28)" }}>
+                        <span className="text-[8px] font-black text-white">AG</span>
                       </div>
-                      <span className="text-[9px] font-black text-gray-900">Agrolync</span>
+                      <span className="text-sm font-black text-gray-900">Agrolync</span>
                     </div>
-                    <span className="text-[8px] text-primary-600 font-bold">₦ 0</span>
+                    <span className="text-[10px] text-primary-600 font-bold bg-primary-50 px-2 py-0.5 rounded-full">Cart: ₦0</span>
                   </div>
-                  {/* Marketplace header */}
-                  <div className="px-3 py-2">
-                    <p className="text-[9px] font-black text-gray-900 mb-1">Fresh Produce</p>
-                    <div className="flex gap-1 mb-2">
-                      {["All", "Veg", "Grains"].map((t, i) => (
-                        <span key={t} className="text-[7px] font-bold px-1.5 py-0.5 rounded-full"
+                  {/* Category pills */}
+                  <div className="px-4 pt-3 pb-2">
+                    <p className="text-xs font-black text-gray-900 mb-2">Fresh Produce</p>
+                    <div className="flex gap-1.5 mb-3">
+                      {["All", "Vegetables", "Grains", "Fruits"].map((t, i) => (
+                        <span key={t} className="text-[9px] font-bold px-2 py-1 rounded-full whitespace-nowrap"
                           style={{ background: i === 0 ? "#2D7A3A" : "#f3f4f6", color: i === 0 ? "white" : "#6b7280" }}>{t}</span>
                       ))}
                     </div>
-                    {/* Product cards */}
+                    {/* Product listings */}
                     {[
-                      { name: "Tumatir (Tomato)", price: "₦380/kg", img: "https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=60&h=60&fit=crop" },
-                      { name: "Wake (Cowpea)", price: "₦520/kg", img: "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=60&h=60&fit=crop" },
-                      { name: "Ope (Pineapple)", price: "₦850/kg", img: "https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=60&h=60&fit=crop" },
+                      { name: "Tumatir (Tomato)", price: "₦380/kg", loc: "Kano State", img: "https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=80&h=80&fit=crop" },
+                      { name: "Wake (Cowpea)", price: "₦520/kg", loc: "Benue State", img: "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=80&h=80&fit=crop" },
+                      { name: "Ogede (Plantain)", price: "₦650/kg", loc: "Lagos State", img: "https://images.unsplash.com/photo-1603833665858-e61d17a86224?w=80&h=80&fit=crop" },
+                      { name: "Ope (Pineapple)", price: "₦850/kg", loc: "Oyo State", img: "https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=80&h=80&fit=crop" },
                     ].map((p) => (
-                      <div key={p.name} className="flex items-center gap-2 mb-2 p-1.5 rounded-lg bg-gray-50">
-                        <img src={p.img} alt={p.name} className="w-8 h-8 rounded-lg object-cover shrink-0" />
+                      <div key={p.name} className="flex items-center gap-3 mb-2.5 p-2 rounded-xl bg-gray-50 border border-gray-100">
+                        <img src={p.img} alt={p.name} className="w-11 h-11 rounded-xl object-cover shrink-0" />
                         <div className="flex-1 min-w-0">
-                          <p className="text-[8px] font-bold text-gray-900 truncate">{p.name}</p>
-                          <p className="text-[8px] text-primary-600 font-black">{p.price}</p>
+                          <p className="text-[10px] font-bold text-gray-900 truncate">{p.name}</p>
+                          <p className="text-[9px] text-gray-400">{p.loc}</p>
+                          <p className="text-[11px] font-black text-primary-600">{p.price}</p>
                         </div>
-                        <button className="shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-white text-xs font-bold"
-                          style={{ background: "#2D7A3A" }}>+</button>
+                        <button className="shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-white font-bold text-base"
+                          style={{ background: "linear-gradient(135deg,#2D7A3A,#4CAF72)" }}>+</button>
                       </div>
                     ))}
                   </div>
                   {/* Bottom nav */}
-                  <div className="border-t border-gray-100 flex justify-around py-2 px-2">
-                    {["🏠", "🛒", "📊", "👤"].map((icon, i) => (
-                      <div key={i} className="flex flex-col items-center gap-0.5">
-                        <span className="text-sm">{icon}</span>
+                  <div className="border-t border-gray-100 flex justify-around py-2.5 px-4 bg-white">
+                    {[["🏠","Home"],["🛒","Market"],["📊","Prices"],["👤","Account"]].map(([icon, label], i) => (
+                      <div key={label} className="flex flex-col items-center gap-0.5">
+                        <span className="text-base">{icon}</span>
+                        <span className="text-[8px] font-medium" style={{ color: i === 0 ? "#2D7A3A" : "#9ca3af" }}>{label}</span>
                         {i === 0 && <div className="w-1 h-1 rounded-full bg-primary-500" />}
                       </div>
                     ))}
