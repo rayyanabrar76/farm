@@ -2,18 +2,19 @@
 import { X, ShoppingCart, Trash2, Package } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useToast } from "@/context/ToastContext";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 interface Props { open: boolean; onClose: () => void; }
 
 export default function CartSidebar({ open, onClose }: Props) {
-  const { items, removeItem, clearCart, total, count } = useCart();
+  const { items, removeItem, total, count } = useCart();
   const { showToast } = useToast();
+  const router = useRouter();
 
-  const checkout = () => {
-    clearCart();
+  const goToCheckout = () => {
     onClose();
-    showToast("Order placed! Farmers have been notified. SMS confirmation incoming. ✓", "success");
+    router.push("/checkout");
   };
 
   return (
@@ -90,9 +91,9 @@ export default function CartSidebar({ open, onClose }: Props) {
                 <span className="text-primary-500">₦{(total + 1500).toLocaleString()}</span>
               </div>
             </div>
-            <button onClick={checkout} className="w-full flex items-center justify-center gap-2 py-3.5 bg-primary-500 hover:bg-primary-600 text-white font-bold rounded-xl transition-colors shadow-green">
+            <button onClick={goToCheckout} className="w-full flex items-center justify-center gap-2 py-3.5 bg-primary-500 hover:bg-primary-600 text-white font-bold rounded-xl transition-colors shadow-green">
               <Package size={18} />
-              Confirm Order
+              Proceed to Checkout
             </button>
             <p className="text-[11px] text-gray-400 text-center mt-2 flex items-center justify-center gap-1">
               <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
