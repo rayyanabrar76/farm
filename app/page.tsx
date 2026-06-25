@@ -168,7 +168,7 @@ export default function HomePage() {
           </div>
 
           {/* Main grid: 3 columns tight, no gap between left two, phone on right */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-1">
 
             {/* LEFT COL: two stacked cards */}
             <div className="flex flex-col gap-3">
@@ -358,7 +358,7 @@ export default function HomePage() {
           </div>
 
           {/* Bottom: LOGISTICS wide card */}
-          <div className="relative rounded-2xl overflow-hidden border border-accent-200 p-7 sm:p-9 mt-3"
+          <div className="relative rounded-2xl overflow-hidden border border-accent-200 p-7 sm:p-9 mt-1"
             style={{
               background: "#fffbf0",
               backgroundImage: "radial-gradient(circle, #fde68a 1px, transparent 1px)",
