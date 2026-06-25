@@ -147,7 +147,7 @@ export default function HeroSlider() {
       {/* Content */}
       <div
         className="relative z-10 h-full flex items-center"
-        style={{ paddingTop: "72px", opacity: fading ? 0 : 1, transition: "opacity 0.3s ease" }}
+        style={{ paddingTop: "100px", opacity: fading ? 0 : 1, transition: "opacity 0.3s ease" }}
       >
         <div className="max-w-7xl mx-auto px-5 sm:px-10 w-full pb-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
@@ -200,15 +200,14 @@ export default function HeroSlider() {
                 onMouseMove={handleMouseMove}
                 onMouseLeave={() => setTilt({ x: 0, y: 0 })}
                 style={{
-                  width: 265,
+                  width: 230,
                   transition: "transform 0.12s ease",
                   transform: `perspective(1000px) rotateY(${-8 + tilt.x}deg) rotateX(${4 + tilt.y}deg)`,
-                  filter: "drop-shadow(0 40px 80px rgba(0,0,0,0.65))",
                 }}
               >
                 {/* Phone shell */}
-                <div className="relative rounded-[46px] overflow-hidden"
-                  style={{ width: 265, height: 540, background: "#0d0d0d", border: "2.5px solid rgba(255,255,255,0.13)" }}>
+                <div className="relative rounded-[40px] overflow-hidden"
+                  style={{ width: 230, height: 460, background: "#0d0d0d", border: "2.5px solid rgba(255,255,255,0.13)", boxShadow: "0 40px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05)" }}>
 
                   {/* Dynamic Island */}
                   <div className="absolute top-3.5 left-1/2 -translate-x-1/2 z-20 rounded-full bg-black flex items-center justify-center gap-2"
@@ -218,7 +217,7 @@ export default function HeroSlider() {
                   </div>
 
                   {/* Screen */}
-                  <div className="absolute inset-0 overflow-hidden" style={{ borderRadius: 44, background: "#f9fafb" }}>
+                  <div className="absolute inset-0 overflow-hidden" style={{ borderRadius: 38, background: "#f9fafb" }}>
 
                     {/* App header */}
                     <div className="px-4 pt-12 pb-2.5 flex items-center justify-between bg-white border-b border-gray-100">
@@ -328,9 +327,6 @@ export default function HeroSlider() {
                   </div>
                 </div>
 
-                {/* Green glow behind phone */}
-                <div className="absolute inset-0 -z-10 blur-3xl opacity-20 rounded-full"
-                  style={{ background: "radial-gradient(circle at 50% 60%, #4CAF72 0%, transparent 70%)" }} />
               </div>
             </div>
 

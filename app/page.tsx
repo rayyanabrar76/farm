@@ -75,8 +75,30 @@ export default function HomePage() {
 
   return (
     <>
-      {/* ── HERO SLIDER with Three.js ── */}
+      {/* ── HERO SLIDER ── */}
       <HeroSlider />
+
+      {/* ── LIVE MARQUEE TICKER ── */}
+      <div className="relative overflow-hidden border-y border-gray-900" style={{ background: "#0f1a12", height: 40 }}>
+        <div className="absolute left-0 top-0 bottom-0 w-16 z-10 pointer-events-none"
+          style={{ background: "linear-gradient(to right, #0f1a12, transparent)" }} />
+        <div className="absolute right-0 top-0 bottom-0 w-16 z-10 pointer-events-none"
+          style={{ background: "linear-gradient(to left, #0f1a12, transparent)" }} />
+        <div className="ticker-wrap h-full flex items-center">
+          <div className="ticker-inner inline-flex items-center text-xs font-semibold whitespace-nowrap" style={{ color: "#a3d9a5" }}>
+            {[0, 1].map((ri) => (
+              <span key={ri} className="inline-flex items-center">
+                {TICKER_ITEMS.map((item, i) => (
+                  <span key={i} className="inline-flex items-center gap-2 px-5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-green-400 shrink-0 inline-block" />
+                    {item}
+                  </span>
+                ))}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
 
       {/* ── FEATURED PRODUCE (Arena Club full-width grid style) ── */}
       <section className="pt-10 pb-0 bg-white border-b border-gray-100">
