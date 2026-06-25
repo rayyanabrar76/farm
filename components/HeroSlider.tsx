@@ -60,7 +60,7 @@ export default function HeroSlider() {
   const Icon = s.ctaIcon;
 
   return (
-    <section className="relative w-full overflow-hidden" style={{ height: "clamp(460px, 65vh, 580px)" }}>
+    <section className="relative w-full overflow-hidden" style={{ height: "clamp(600px, 80vh, 760px)" }}>
 
       {/* ── Full-screen background image ── */}
       <div
