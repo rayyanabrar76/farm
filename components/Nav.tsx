@@ -9,6 +9,7 @@ import Logo from "./Logo";
 import clsx from "clsx";
 
 const NAV_LINKS = [
+  { href: "/", label: "Home" },
   { href: "/marketplace", label: "Marketplace" },
   { href: "/dashboard", label: "Dashboard" },
   { href: "/register", label: "List Produce" },

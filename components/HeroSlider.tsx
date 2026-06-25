@@ -110,7 +110,7 @@ export default function HeroSlider() {
 
           {/* Headline */}
           <h1 className="font-black text-white leading-none tracking-tight mb-6 sm:mb-8"
-            style={{ fontSize: "clamp(2.6rem, 8vw, 6.5rem)" }}>
+            style={{ fontSize: "clamp(1.8rem, 5vw, 4rem)" }}>
             {s.headline.map((line, i) => (
               <span key={i} className="block"
                 style={i === s.accentLine ? { color: s.accent } : {}}>

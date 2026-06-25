@@ -58,7 +58,7 @@ export default function Logo({ variant = "full", onDark = false, className, heig
   const gap   = Math.round(height * 0.28);
   const fs1   = Math.round(height * 0.48);
   const fs2   = Math.round(height * 0.24);
-  const totalW = iconH + gap + Math.round(height * 2.2);
+  const totalW = iconH + gap + Math.round(height * 3.8);
 
   return (
     <svg xmlns="http://www.w3.org/2000/svg"
