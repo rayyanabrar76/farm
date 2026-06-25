@@ -40,7 +40,7 @@ export default function ProductDetailPage() {
 
   return (
     <>
-      <div className="pt-16 pb-0">
+      <div className="pt-[100px] pb-0">
         {/* Breadcrumb */}
         <div className="max-w-7xl mx-auto px-4 py-5">
           <Link href="/marketplace" className="inline-flex items-center gap-2 text-sm font-semibold text-gray-500 hover:text-primary-500 transition-colors">

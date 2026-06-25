@@ -85,7 +85,7 @@ export default function DashboardPage() {
 
   return (
     <>
-      <div className="pt-16 min-h-screen" style={{ background: "#F4F7F4" }}>
+      <div className="pt-[100px] min-h-screen" style={{ background: "#F4F7F4" }}>
         {/* Dashboard header band */}
         <div className="relative overflow-hidden px-4 py-8" style={{ background: "linear-gradient(135deg, #0E3317 0%, #1B5E28 60%, #2D7A3A 100%)" }}>
           <div className="hero-pattern absolute inset-0 pointer-events-none" />

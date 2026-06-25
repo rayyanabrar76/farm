@@ -34,7 +34,7 @@ export default function MarketplacePage() {
   return (
     <>
       {/* Page header */}
-      <div className="pt-16">
+      <div className="pt-[100px]">
         {/* Hero banner */}
         <div className="relative overflow-hidden py-14 px-4"
           style={{ background: "linear-gradient(150deg, #0E3317 0%, #1B5E28 55%, #2D7A3A 100%)" }}

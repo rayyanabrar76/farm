@@ -27,7 +27,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen pt-16 flex bg-surface">
+    <div className="min-h-screen pt-[100px] flex bg-surface">
       {/* Left decorative panel — hidden on mobile */}
       <div className="hidden lg:flex flex-col justify-between flex-1 relative overflow-hidden p-12"
         style={{ background: "linear-gradient(150deg, #071809 0%, #0E3317 45%, #1B5E28 100%)" }}
