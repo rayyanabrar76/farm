@@ -69,7 +69,7 @@ export default function ProductDetailPage() {
               </div>
 
               {/* Quality badges */}
-              <div className="flex gap-3 mt-4">
+              <div className="flex flex-col xs:flex-row gap-3 mt-4">
                 <div className="flex-1 flex items-center gap-2.5 bg-white border border-gray-100 rounded-xl p-3">
                   <div className="w-8 h-8 rounded-lg bg-primary-50 flex items-center justify-center"><Award size={15} className="text-primary-500" /></div>
                   <div><p className="text-[10px] text-gray-400 font-medium">Quality</p><p className="text-xs font-bold">{product.quality}</p></div>
@@ -98,7 +98,7 @@ export default function ProductDetailPage() {
                 {(() => { const Icon = CATEGORY_ICON[product.category]; return <Icon size={11} />; })()}
                 {product.category}
               </p>
-              <h1 className="text-3xl sm:text-4xl font-black text-gray-900 mb-3 leading-tight">{product.name}</h1>
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-gray-900 mb-3 leading-tight">{product.name}</h1>
 
               {/* Rating */}
               <div className="flex items-center gap-3 mb-5">
@@ -145,11 +145,11 @@ export default function ProductDetailPage() {
                 <span className="text-sm font-semibold text-gray-700">Quantity (kg):</span>
                 <div className="flex items-center border-2 border-gray-200 rounded-xl overflow-hidden">
                   <button onClick={() => adjustQty(-product.minOrder)}
-                    className="w-10 h-10 flex items-center justify-center hover:bg-gray-50 text-gray-600 transition-colors border-r border-gray-200"
+                    className="w-11 h-11 flex items-center justify-center hover:bg-gray-50 text-gray-600 transition-colors border-r border-gray-200"
                   ><Minus size={14} /></button>
                   <span className="w-16 text-center font-bold text-sm">{qty}</span>
                   <button onClick={() => adjustQty(product.minOrder)}
-                    className="w-10 h-10 flex items-center justify-center hover:bg-gray-50 text-gray-600 transition-colors border-l border-gray-200"
+                    className="w-11 h-11 flex items-center justify-center hover:bg-gray-50 text-gray-600 transition-colors border-l border-gray-200"
                   ><Plus size={14} /></button>
                 </div>
                 <span className="text-xs text-gray-400">Min. {product.minOrder}kg</span>

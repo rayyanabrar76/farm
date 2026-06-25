@@ -73,7 +73,7 @@ export default function HeroSlider() {
       <div
         className="relative z-10 max-w-7xl mx-auto flex items-stretch"
         style={{
-          minHeight: "460px",
+          minHeight: "clamp(320px, 60vw, 480px)",
           opacity: fading ? 0 : 1,
           transition: "opacity 0.28s ease",
         }}
@@ -104,7 +104,7 @@ export default function HeroSlider() {
         </div>
 
         {/* RIGHT — Text content */}
-        <div className="flex-1 flex flex-col justify-center px-8 sm:px-12 py-14">
+        <div className="flex-1 flex flex-col justify-center px-5 sm:px-8 md:px-12 py-10 sm:py-14">
           {/* Eyebrow */}
           <p
             className="text-xs font-black tracking-[0.22em] uppercase mb-5"
@@ -160,7 +160,7 @@ export default function HeroSlider() {
       <button
         onClick={() => go(cur - 1)}
         aria-label="Previous"
-        className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full flex items-center justify-center text-white transition-all hover:scale-110"
+        className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full flex items-center justify-center text-white transition-all hover:scale-110"
         style={{ background: "rgba(0,0,0,0.35)", border: "1px solid rgba(255,255,255,0.14)" }}
       >
         <ChevronLeft size={20} />
@@ -170,7 +170,7 @@ export default function HeroSlider() {
       <button
         onClick={() => go(cur + 1)}
         aria-label="Next"
-        className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full flex items-center justify-center text-white transition-all hover:scale-110"
+        className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full flex items-center justify-center text-white transition-all hover:scale-110"
         style={{ background: "rgba(0,0,0,0.35)", border: "1px solid rgba(255,255,255,0.14)" }}
       >
         <ChevronRight size={20} />

@@ -35,7 +35,7 @@ export default function CartSidebar({ open, onClose }: Props) {
               <span className="bg-primary-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">{count}</span>
             )}
           </div>
-          <button onClick={onClose} className="w-8 h-8 rounded-lg bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
+          <button onClick={onClose} className="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
             <X size={16} />
           </button>
         </div>
@@ -64,7 +64,7 @@ export default function CartSidebar({ open, onClose }: Props) {
                       ₦{(item.price * item.cartQty).toLocaleString()}
                     </p>
                   </div>
-                  <button onClick={() => removeItem(item.id)} className="w-7 h-7 rounded-lg hover:bg-red-50 hover:text-red-500 flex items-center justify-center text-gray-400 transition-colors shrink-0">
+                  <button onClick={() => removeItem(item.id)} className="w-9 h-9 rounded-lg hover:bg-red-50 hover:text-red-500 flex items-center justify-center text-gray-400 transition-colors shrink-0">
                     <Trash2 size={14} />
                   </button>
                 </div>

@@ -68,7 +68,7 @@ export default function Nav() {
 
             {/* Cart */}
             <button onClick={() => setCartOpen(true)}
-              className="relative flex items-center justify-center w-10 h-10 rounded-xl hover:bg-gray-100 transition-colors"
+              className="relative flex items-center justify-center w-11 h-11 rounded-xl hover:bg-gray-100 transition-colors"
               aria-label="Open cart"
             >
               <ShoppingCart size={19} className="text-gray-600" />
@@ -81,7 +81,7 @@ export default function Nav() {
 
             {/* Hamburger */}
             <button onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden flex items-center justify-center w-10 h-10 rounded-xl hover:bg-gray-100 transition-colors"
+              className="md:hidden flex items-center justify-center w-11 h-11 rounded-xl hover:bg-gray-100 transition-colors"
               aria-label="Toggle menu"
             >
               {mobileOpen ? <X size={19} /> : <Menu size={19} />}
@@ -96,7 +96,7 @@ export default function Nav() {
               <Link key={l.href} href={l.href}
                 onClick={() => setMobileOpen(false)}
                 className={clsx(
-                  "px-4 py-2.5 rounded-xl text-sm font-semibold transition-colors",
+                  "px-4 py-3 rounded-xl text-sm font-semibold transition-colors",
                   pathname === l.href ? "bg-primary-50 text-primary-600" : "text-gray-600 hover:bg-gray-50"
                 )}
               >
@@ -105,10 +105,10 @@ export default function Nav() {
             ))}
             <div className="flex gap-2 mt-3 pt-3 border-t border-gray-100">
               <Link href="/login" onClick={() => setMobileOpen(false)}
-                className="flex-1 text-center py-2.5 rounded-xl border border-gray-200 text-gray-600 text-sm font-semibold"
+                className="flex-1 text-center py-3 rounded-xl border border-gray-200 text-gray-600 text-sm font-semibold"
               >Login</Link>
               <Link href="/register" onClick={() => setMobileOpen(false)}
-                className="flex-1 text-center py-2.5 rounded-xl bg-primary-500 text-white text-sm font-semibold"
+                className="flex-1 text-center py-3 rounded-xl bg-primary-500 text-white text-sm font-semibold"
               >Sign Up</Link>
             </div>
           </div>
