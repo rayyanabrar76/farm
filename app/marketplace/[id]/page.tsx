@@ -10,6 +10,7 @@ import { useToast } from "@/context/ToastContext";
 import Footer from "@/components/Footer";
 import ProductCard from "@/components/ProductCard";
 import ChatModal from "@/components/ChatModal";
+import OrderRequestModal from "@/components/OrderRequestModal";
 
 export default function ProductDetailPage() {
   const params = useParams();
@@ -21,6 +22,7 @@ export default function ProductDetailPage() {
   const { showToast } = useToast();
   const [qty, setQty] = useState(product.minOrder);
   const [chatOpen, setChatOpen] = useState(false);
+  const [orderOpen, setOrderOpen] = useState(false);
 
   const adjustQty = (delta: number) => {
     setQty((prev) => Math.max(product.minOrder, prev + delta));
@@ -32,8 +34,7 @@ export default function ProductDetailPage() {
   };
 
   const handleBuyNow = () => {
-    addItem(product, qty);
-    showToast("Order placed! Farmer will confirm shortly.", "success");
+    setOrderOpen(true);
   };
 
   const related = PRODUCTS.filter((p) => p.id !== id && p.category === product.category).slice(0, 4);
@@ -221,6 +222,12 @@ export default function ProductDetailPage() {
         farmerName={product.farmer}
         farmerInitial={product.farmerInitial}
         produceName={product.name}
+      />
+      <OrderRequestModal
+        open={orderOpen}
+        onClose={() => setOrderOpen(false)}
+        product={product}
+        qty={qty}
       />
     </>
   );

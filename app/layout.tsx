@@ -7,7 +7,7 @@ import { CartProvider } from "@/context/CartContext";
 import { ToastProvider } from "@/context/ToastContext";
 
 export const metadata: Metadata = {
-  title: "Agrolync — Farm to Market, Direct",
+  title: "Agrolync - Farm to Market, Direct",
   description: "Agrolync connects Nigerian and African farmers directly to buyers. Reduce post-harvest losses and earn more.",
 };
 
