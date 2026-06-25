@@ -68,6 +68,7 @@ export default function HeroSlider() {
   const [notif,      setNotif]      = useState<string | null>(null);
   const [activeCard, setActiveCard] = useState(0);
   const [tilt,       setTilt]       = useState({ x: 0, y: 0 });
+  const [hovered,    setHovered]    = useState(false);
   const phoneRef = useRef<HTMLDivElement>(null);
 
   const go = useCallback((idx: number) => {
@@ -108,6 +109,20 @@ export default function HeroSlider() {
     const t = setInterval(() => setActiveCard(c => (c + 1) % PHONE_PRODUCTS.length), 2400);
     return () => clearInterval(t);
   }, []);
+
+  // Gentle idle breathing tilt when mouse not over phone
+  useEffect(() => {
+    if (hovered) return;
+    let frame = 0;
+    const t = setInterval(() => {
+      frame++;
+      setTilt({
+        x: Math.sin(frame * 0.035) * 4,
+        y: Math.cos(frame * 0.025) * 2.5,
+      });
+    }, 40);
+    return () => clearInterval(t);
+  }, [hovered]);
 
   // Mouse parallax on phone
   const handleMouseMove = (e: React.MouseEvent) => {
@@ -197,11 +212,12 @@ export default function HeroSlider() {
             <div className="hidden lg:flex justify-center items-center">
               <div
                 ref={phoneRef}
+                onMouseEnter={() => setHovered(true)}
                 onMouseMove={handleMouseMove}
-                onMouseLeave={() => setTilt({ x: 0, y: 0 })}
+                onMouseLeave={() => { setHovered(false); }}
                 style={{
                   width: 230,
-                  transition: "transform 0.15s ease",
+                  transition: hovered ? "transform 0.1s ease" : "transform 0.6s ease",
                   transform: `perspective(1000px) rotateY(${tilt.x}deg) rotateX(${tilt.y}deg)`,
                   willChange: "transform",
                   WebkitBackfaceVisibility: "hidden",
