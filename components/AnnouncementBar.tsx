@@ -4,11 +4,11 @@ import { useState } from "react";
 import { X } from "lucide-react";
 
 const ANNOUNCEMENTS = [
-  "🌱 Agrolync is live — 12,400+ verified farmers across Nigeria.",
-  "🚀 New: Escrow-protected payments — get paid on delivery, every time.",
-  "📊 Track real-time prices from Dawanau, Onitsha & 40+ markets.",
-  "✅ Join free today — no hidden fees, no middlemen.",
-  "🌍 Connecting farmers to buyers across all 36 Nigerian states.",
+  "Agrolync is live — 12,400+ verified farmers across Nigeria.",
+  "New: Escrow-protected payments — get paid on delivery, every time.",
+  "Track real-time prices from Dawanau, Onitsha & 40+ markets.",
+  "Join free today — no hidden fees, no middlemen.",
+  "Connecting farmers to buyers across all 36 Nigerian states.",
 ];
 
 export default function AnnouncementBar() {
