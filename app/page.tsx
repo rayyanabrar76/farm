@@ -1,6 +1,5 @@
 "use client";
 import Link from "next/link";
-import { useRef } from "react";
 import Footer from "@/components/Footer";
 import ProductCard from "@/components/ProductCard";
 import HeroSlider from "@/components/HeroSlider";
@@ -73,59 +72,33 @@ const GRID_SECTIONS = [
 
 export default function HomePage() {
   const tickerText = TICKER_ITEMS.join("   ·   ");
-  const carouselRef = useRef<HTMLDivElement>(null);
-  const scrollCarousel = (dir: number) => {
-    carouselRef.current?.scrollBy({ left: dir * 320, behavior: "smooth" });
-  };
 
   return (
     <>
       {/* ── HERO SLIDER with Three.js ── */}
       <HeroSlider />
 
-      {/* ── FEATURED PRODUCE (Arena Club carousel style) ── */}
-      <section className="py-12 bg-white border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          {/* Header row */}
-          <div className="flex items-end justify-between mb-1">
-            <h2 className="text-2xl font-black text-gray-900 uppercase tracking-tight">Featured Produce</h2>
-            <div className="flex items-center gap-2">
-              <button
-                onClick={() => scrollCarousel(-1)}
-                className="w-9 h-9 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50 hover:border-gray-300 transition-all"
-                aria-label="Scroll left"
-              >
-                <ChevronLeft size={16} className="text-gray-600" />
-              </button>
-              <button
-                onClick={() => scrollCarousel(1)}
-                className="w-9 h-9 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50 hover:border-gray-300 transition-all"
-                aria-label="Scroll right"
-              >
-                <ChevronRight size={16} className="text-gray-600" />
-              </button>
+      {/* ── FEATURED PRODUCE (Arena Club full-width grid style) ── */}
+      <section className="pt-10 pb-0 bg-white border-b border-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 mb-4">
+          <div className="flex items-end justify-between">
+            <div>
+              <h2 className="text-2xl font-black text-gray-900 uppercase tracking-tight">Featured Produce</h2>
+              <Link href="/marketplace" className="inline-flex items-center gap-1 text-sm font-bold text-primary-600 hover:text-primary-700 transition-colors group mt-1">
+                Fresh Listings
+                <ChevronRight size={15} className="transition-transform group-hover:translate-x-0.5" />
+              </Link>
             </div>
-          </div>
-
-          {/* Sub-label */}
-          <div className="mb-6">
-            <Link href="/marketplace" className="inline-flex items-center gap-1 text-sm font-bold text-primary-600 hover:text-primary-700 transition-colors group">
-              Fresh Listings
-              <ChevronRight size={15} className="transition-transform group-hover:translate-x-0.5" />
+            <Link href="/marketplace" className="text-sm font-semibold text-gray-500 hover:text-gray-800 transition-colors">
+              View all →
             </Link>
           </div>
-
-          {/* Carousel */}
-          <div
-            ref={carouselRef}
-            className="flex gap-4 overflow-x-auto no-scrollbar pb-2 snap-x snap-mandatory"
-          >
-            {PRODUCTS.map((p) => (
-              <div key={p.id} className="snap-start shrink-0 w-72">
-                <ProductCard product={p} />
-              </div>
-            ))}
-          </div>
+        </div>
+        {/* Full-width 4-col grid — Arena Club style */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 px-4 sm:px-6">
+          {PRODUCTS.slice(0, 4).map((p) => (
+            <ProductCard key={p.id} product={p} />
+          ))}
         </div>
       </section>
 
@@ -133,7 +106,7 @@ export default function HomePage() {
       {GRID_SECTIONS.map((section, si) => {
         const sectionProducts = section.ids.map(id => PRODUCTS.find(p => p.id === id)!);
         return (
-          <section key={si} className="py-12 bg-white border-t border-gray-100">
+          <section key={si} className="pt-4 pb-10 bg-white border-t border-gray-100">
             <div className="max-w-7xl mx-auto px-4 sm:px-6">
               {/* Header */}
               <div className="flex items-end justify-between mb-1">
@@ -147,7 +120,7 @@ export default function HomePage() {
                 </Link>
               </div>
               {/* 4-column grid */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-1">
                 {sectionProducts.map(p => p && <ProductCard key={p.id} product={p} />)}
               </div>
             </div>

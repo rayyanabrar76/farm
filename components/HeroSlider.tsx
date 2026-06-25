@@ -89,10 +89,10 @@ export default function HeroSlider() {
 
       {/* ── Content ── */}
       <div
-        className="relative z-10 h-full flex items-center pt-16"
-        style={{ opacity: fading ? 0 : 1, transition: "opacity 0.3s ease" }}
+        className="relative z-10 h-full flex items-center"
+        style={{ paddingTop: "150px", opacity: fading ? 0 : 1, transition: "opacity 0.3s ease" }}
       >
-        <div className="max-w-7xl mx-auto px-5 sm:px-10 w-full py-20">
+        <div className="max-w-7xl mx-auto px-5 sm:px-10 w-full pb-10">
 
           {/* Eyebrow */}
           <div className="flex items-center gap-3 mb-5">

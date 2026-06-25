@@ -28,9 +28,9 @@ export default function ProductCard({ product: p }: Props) {
   };
 
   return (
-    <div className="group flex flex-col">
+    <div className="flex flex-col">
       {/* ── Card image area (Arena Club portrait style) ── */}
-      <Link href={`/marketplace/${p.id}`} className="block relative rounded-2xl overflow-hidden mb-3"
+      <Link href={`/marketplace/${p.id}`} className="group block relative rounded-2xl overflow-hidden mb-3"
         style={{ aspectRatio: "3/4", background: CARD_BG[p.category] ?? CARD_BG.Vegetables }}>
 
         {/* Badge chip — top left */}

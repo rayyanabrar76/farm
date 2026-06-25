@@ -55,7 +55,7 @@ export default function Nav() {
           <div className="flex-1" />
 
           {/* Search bar — desktop */}
-          <div className="hidden md:flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 w-52 hover:border-gray-300 transition-colors">
+          <div className="hidden md:flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 w-64 hover:border-gray-300 transition-colors">
             <Search size={14} className="text-gray-400 shrink-0" />
             <input
               type="text"
