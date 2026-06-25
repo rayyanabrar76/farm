@@ -300,7 +300,7 @@ export default function HomePage() {
           <p className="text-center text-xs font-black tracking-[0.25em] text-gray-400 uppercase mb-12">Our Industry Partners</p>
           <div className="flex flex-wrap items-center justify-center gap-x-10 sm:gap-x-16 gap-y-6 sm:gap-y-8">
             {PARTNERS.map((p) => (
-              <span key={p} className="text-2xl sm:text-3xl font-black text-gray-200 hover:text-gray-700 transition-colors duration-200 cursor-default select-none tracking-tight">{p}</span>
+              <span key={p} className="text-2xl sm:text-3xl font-black text-gray-700 hover:text-gray-950 transition-colors duration-200 cursor-default select-none tracking-tight">{p}</span>
             ))}
           </div>
         </div>
