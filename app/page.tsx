@@ -343,14 +343,14 @@ export default function HomePage() {
       </section>
 
       {/* ── FOLLOW ON INSTAGRAM ── */}
-      <section className="py-16 px-4 border-t border-gray-100 bg-white">
+      <section className="py-16 px-4" style={{ background: "linear-gradient(135deg, #1B5E28 0%, #2D7A3A 60%, #3CB96B 100%)" }}>
         <div className="max-w-5xl mx-auto text-center">
-          <p className="text-[10px] font-black tracking-[0.22em] text-gray-400 uppercase mb-3">Follow Us On Instagram!</p>
-          <p className="text-2xl font-black text-gray-900 mb-8">@agrolync</p>
+          <p className="text-[10px] font-black tracking-[0.22em] text-white/60 uppercase mb-3">Follow Us On Instagram!</p>
+          <p className="text-2xl font-black text-white mb-8">@agrolync</p>
           <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 mb-6">
             {IG_POSTS.map((post, i) => (
               <a key={i} href="https://instagram.com/agrolync" target="_blank" rel="noopener noreferrer"
-                className="relative aspect-square rounded-2xl overflow-hidden group block bg-gray-100">
+                className="relative aspect-square rounded-2xl overflow-hidden group block bg-white/10">
                 <img src={post.img} alt={post.alt}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 rounded-2xl" />
@@ -358,7 +358,7 @@ export default function HomePage() {
             ))}
           </div>
           <a href="https://instagram.com/agrolync" target="_blank" rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-sm font-bold text-primary-600 hover:text-primary-700 transition-colors">
+            className="inline-flex items-center gap-2 text-sm font-bold text-white hover:text-white/80 transition-colors">
             View all posts <ArrowRight size={14} />
           </a>
         </div>
