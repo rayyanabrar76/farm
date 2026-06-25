@@ -161,56 +161,104 @@ export default function HomePage() {
         );
       })}
 
-      {/* ── FEATURE SECTION (Arena Club 3-column style) ── */}
-      <section className="py-20 px-4 bg-white border-t border-gray-100">
+      {/* ── FEATURE SECTION (Arena Club layout: tight grid + phone mockup) ── */}
+      <section className="py-20 px-4 bg-white border-t border-gray-100 overflow-hidden">
         <div className="max-w-7xl mx-auto">
 
-          {/* Centered headline */}
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-gray-900 text-center uppercase tracking-tight mb-16 max-w-3xl mx-auto leading-tight">
-            Agrolync brings the power of the market into every farmer&apos;s hands
-          </h2>
+          {/* Section label + headline — left aligned like Arena Club */}
+          <div className="mb-10">
+            <p className="text-[10px] font-black tracking-[0.22em] text-primary-600 uppercase mb-2">PLATFORM</p>
+            <h2 className="text-3xl sm:text-4xl font-black text-gray-900 leading-tight">
+              Buy, sell, and trade<br />farm produce.
+            </h2>
+          </div>
 
-          {/* 3-column feature cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* Main grid: 3 columns tight, no gap between left two, phone on right */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
 
-            {/* VERIFY */}
-            <div className="flex flex-col rounded-2xl border border-gray-100 bg-gray-50 overflow-hidden">
-              <div className="p-7 pb-5">
-                <p className="text-[10px] font-black tracking-[0.2em] text-primary-600 uppercase mb-3">VERIFY</p>
-                <h3 className="text-xl font-black text-gray-900 leading-snug">AI-powered farmer<br />verification.</h3>
-              </div>
-              {/* Mockup visual */}
-              <div className="mx-5 mb-5 rounded-xl border border-gray-200 bg-white p-4 shadow-sm">
-                <div className="flex items-center gap-3 mb-3 pb-3 border-b border-gray-100">
-                  <div className="w-10 h-10 rounded-full bg-linear-to-br from-primary-400 to-primary-600 flex items-center justify-center text-white text-sm font-black">AM</div>
-                  <div>
-                    <p className="text-xs font-bold text-gray-900">Alhaji Musa Ibrahim</p>
-                    <p className="text-[10px] text-gray-400">Kano State · 2.4 ha farm</p>
-                  </div>
-                  <div className="ml-auto">
-                    <span className="text-[10px] font-bold text-primary-600 bg-primary-50 border border-primary-100 px-2 py-0.5 rounded-full flex items-center gap-1">
-                      <CheckCircle size={9} /> Verified
+            {/* LEFT COL: two stacked cards */}
+            <div className="flex flex-col gap-3">
+
+              {/* VERIFY — dot grid background */}
+              <div className="rounded-2xl overflow-hidden flex flex-col"
+                style={{
+                  background: "#f8faf8",
+                  backgroundImage: "radial-gradient(circle, #d1fae5 1px, transparent 1px)",
+                  backgroundSize: "18px 18px",
+                  border: "1px solid #e5e7eb",
+                }}>
+                <div className="p-5">
+                  <p className="text-[10px] font-black tracking-[0.2em] text-primary-600 uppercase mb-2">VERIFY</p>
+                  <h3 className="text-base font-black text-gray-900 leading-snug">AI-powered farmer verification.</h3>
+                </div>
+                <div className="mx-4 mb-4 rounded-xl bg-white border border-gray-100 p-3 shadow-sm">
+                  <div className="flex items-center gap-2.5 mb-2.5 pb-2.5 border-b border-gray-100">
+                    <div className="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-black shrink-0"
+                      style={{ background: "linear-gradient(135deg,#2D7A3A,#1B5E28)" }}>AM</div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-xs font-bold text-gray-900 truncate">Alhaji Musa Ibrahim</p>
+                      <p className="text-[10px] text-gray-400">Kano State · 2.4 ha farm</p>
+                    </div>
+                    <span className="text-[9px] font-bold text-primary-600 bg-primary-50 border border-primary-100 px-1.5 py-0.5 rounded-full flex items-center gap-0.5 shrink-0">
+                      <CheckCircle size={8} /> Verified
                     </span>
                   </div>
+                  {[["NIN Identity", true], ["Farm Location", true], ["Phone Number", true]].map(([l, v]) => (
+                    <div key={l as string} className="flex items-center justify-between py-1">
+                      <span className="text-[10px] text-gray-500">{l as string}</span>
+                      <span className={`text-[10px] font-bold ${v ? "text-primary-600" : "text-red-400"}`}>{v ? "✓ Confirmed" : "✗ Pending"}</span>
+                    </div>
+                  ))}
                 </div>
-                {[["NIN Identity", true], ["Farm Location", true], ["Phone Number", true]].map(([l, v]) => (
-                  <div key={l as string} className="flex items-center justify-between py-1.5">
-                    <span className="text-[10px] text-gray-500">{l as string}</span>
-                    <span className={`text-[10px] font-bold ${v ? "text-primary-600" : "text-red-400"}`}>{v ? "✓ Confirmed" : "✗ Pending"}</span>
+              </div>
+
+              {/* ESCROW — gold dot grid background */}
+              <div className="rounded-2xl overflow-hidden flex flex-col flex-1"
+                style={{
+                  background: "#fffbf0",
+                  backgroundImage: "radial-gradient(circle, #fde68a 1px, transparent 1px)",
+                  backgroundSize: "18px 18px",
+                  border: "1px solid #fde68a",
+                }}>
+                <div className="p-5">
+                  <p className="text-[10px] font-black tracking-[0.2em] text-accent-600 uppercase mb-2">ESCROW PAY</p>
+                  <h3 className="text-base font-black text-gray-900 leading-snug">Instant secured payments.</h3>
+                </div>
+                <div className="mx-4 mb-4 rounded-xl bg-white border border-gray-100 p-3 shadow-sm">
+                  <div className="flex items-center justify-between mb-2 pb-2 border-b border-gray-100">
+                    <div>
+                      <p className="text-[10px] text-gray-400">Order Confirmed</p>
+                      <p className="text-base font-black text-gray-900">₦114,000</p>
+                    </div>
+                    <div className="w-7 h-7 rounded-full bg-primary-50 flex items-center justify-center">
+                      <Shield size={13} className="text-primary-600" />
+                    </div>
                   </div>
-                ))}
+                  <div className="flex justify-between mb-1">
+                    <span className="text-[10px] text-gray-400">Produce</span>
+                    <span className="text-[10px] font-semibold text-gray-700">Tumatir · 300kg</span>
+                  </div>
+                  <div className="flex justify-between mb-2">
+                    <span className="text-[10px] text-gray-400">Buyer</span>
+                    <span className="text-[10px] font-semibold text-accent-600">Chidi Restaurants</span>
+                  </div>
+                  <div className="flex items-center gap-1.5 pt-2 border-t border-gray-100">
+                    <div className="w-1.5 h-1.5 rounded-full bg-primary-500 animate-pulse" />
+                    <span className="text-[10px] font-bold text-primary-600">Funds in escrow · Released on delivery</span>
+                  </div>
+                </div>
               </div>
             </div>
 
-            {/* MARKET PRICES */}
-            <div className="flex flex-col rounded-2xl overflow-hidden"
+            {/* CENTER COL: Market prices (tall) */}
+            <div className="rounded-2xl overflow-hidden flex flex-col"
               style={{ background: "linear-gradient(160deg, #071809 0%, #1B5E28 100%)" }}>
-              <div className="p-7 pb-5">
-                <p className="text-[10px] font-black tracking-[0.2em] text-primary-300 uppercase mb-3">MARKET PRICES</p>
+              <div className="p-6 pb-4">
+                <p className="text-[10px] font-black tracking-[0.2em] text-green-300 uppercase mb-2">MARKET PRICES</p>
                 <h3 className="text-xl font-black text-white leading-snug">Real-time price<br />intelligence.</h3>
               </div>
-              {/* Price chart mockup */}
-              <div className="mx-5 mb-5 rounded-xl bg-white/8 border border-white/10 p-4">
+              <div className="mx-4 mb-4 rounded-xl p-4 flex-1"
+                style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}>
                 <p className="text-[9px] font-bold text-white/40 uppercase tracking-widest mb-3">Live Prices · Dawanau Market</p>
                 {[
                   { name: "Tumatir", price: "₦380", pct: 85, up: true },
@@ -218,48 +266,92 @@ export default function HomePage() {
                   { name: "Masara",  price: "₦170", pct: 45, up: false },
                   { name: "Wake",    price: "₦520", pct: 90, up: true },
                 ].map((r) => (
-                  <div key={r.name} className="flex items-center gap-2 mb-2">
+                  <div key={r.name} className="flex items-center gap-2 mb-3">
                     <span className="text-[10px] text-white/60 w-14 shrink-0">{r.name}</span>
                     <div className="flex-1 h-1.5 bg-white/10 rounded-full overflow-hidden">
-                      <div className="h-full rounded-full transition-all"
-                        style={{ width: `${r.pct}%`, background: r.up ? "#4CAF72" : "#F5A623" }} />
+                      <div className="h-full rounded-full" style={{ width: `${r.pct}%`, background: r.up ? "#4CAF72" : "#F5A623" }} />
                     </div>
                     <span className="text-[10px] font-bold text-white/80 w-10 text-right shrink-0">{r.price}</span>
-                    <span className={`text-[9px] font-bold shrink-0 ${r.up ? "text-green-400" : "text-accent-400"}`}>{r.up ? "↑" : "↓"}</span>
+                    <span className={`text-[9px] font-bold shrink-0 ${r.up ? "text-green-400" : "text-amber-400"}`}>{r.up ? "↑" : "↓"}</span>
                   </div>
                 ))}
+                {/* Extra logistics stats */}
+                <div className="mt-4 pt-4 grid grid-cols-3 gap-2" style={{ borderTop: "1px solid rgba(255,255,255,0.1)" }}>
+                  {[["12K+", "Farmers"], ["40+", "Markets"], ["8", "Countries"]].map(([n, l]) => (
+                    <div key={l} className="text-center">
+                      <div className="text-lg font-black text-green-300">{n}</div>
+                      <div className="text-[9px] text-white/40">{l}</div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
 
-            {/* ESCROW PAYMENTS */}
-            <div className="flex flex-col rounded-2xl border border-gray-100 bg-gray-50 overflow-hidden">
-              <div className="p-7 pb-5">
-                <p className="text-[10px] font-black tracking-[0.2em] text-accent-600 uppercase mb-3">ESCROW PAY</p>
-                <h3 className="text-xl font-black text-gray-900 leading-snug">Instant secured<br />payments.</h3>
-              </div>
-              {/* Payment UI mockup */}
-              <div className="mx-5 mb-5 rounded-xl border border-gray-200 bg-white p-4 shadow-sm">
-                <div className="flex items-center justify-between mb-3 pb-3 border-b border-gray-100">
-                  <div>
-                    <p className="text-[10px] text-gray-400">Order Confirmed</p>
-                    <p className="text-lg font-black text-gray-900">₦114,000</p>
-                  </div>
-                  <div className="w-8 h-8 rounded-full bg-primary-50 flex items-center justify-center">
-                    <Shield size={15} className="text-primary-600" />
-                  </div>
+            {/* RIGHT COL: Big phone mockup */}
+            <div className="flex items-center justify-center lg:items-start py-4 lg:py-0">
+              {/* Phone frame */}
+              <div className="relative w-[220px] shrink-0"
+                style={{
+                  background: "#0f0f0f",
+                  borderRadius: "38px",
+                  padding: "10px",
+                  boxShadow: "0 30px 80px rgba(0,0,0,0.25), 0 0 0 1px rgba(255,255,255,0.08)",
+                }}>
+                {/* Notch */}
+                <div className="absolute top-3.5 left-1/2 -translate-x-1/2 w-16 h-4 bg-black rounded-full z-10 flex items-center justify-center gap-1">
+                  <div className="w-1.5 h-1.5 rounded-full bg-gray-800" />
+                  <div className="w-2 h-2 rounded-full bg-gray-700" />
                 </div>
-                <div className="space-y-2">
-                  <div className="flex justify-between">
-                    <span className="text-[10px] text-gray-400">Produce</span>
-                    <span className="text-[10px] font-semibold text-gray-700">Tumatir · 300kg</span>
+                {/* Status bar */}
+                <div className="rounded-[30px] overflow-hidden" style={{ background: "#fff" }}>
+                  <div className="h-8 bg-white flex items-end px-3 pb-1 justify-between">
+                    <span className="text-[8px] font-bold text-gray-900">9:41</span>
+                    <span className="text-[8px] text-gray-500 flex gap-0.5 items-center">▌▌▌ ≋ 🔋</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-[10px] text-gray-400">Buyer</span>
-                    <span className="text-[10px] font-semibold text-gray-700">Chidi Restaurants</span>
+                  {/* App nav */}
+                  <div className="px-3 py-2 border-b border-gray-100 flex items-center justify-between">
+                    <div className="flex items-center gap-1">
+                      <div className="w-5 h-5 rounded-md flex items-center justify-center" style={{ background: "linear-gradient(135deg,#2D7A3A,#1B5E28)" }}>
+                        <span className="text-[6px] font-black text-white">AG</span>
+                      </div>
+                      <span className="text-[9px] font-black text-gray-900">Agrolync</span>
+                    </div>
+                    <span className="text-[8px] text-primary-600 font-bold">₦ 0</span>
                   </div>
-                  <div className="mt-3 pt-2 border-t border-gray-100 flex items-center gap-1.5">
-                    <div className="w-1.5 h-1.5 rounded-full bg-primary-500 animate-pulse" />
-                    <span className="text-[10px] font-bold text-primary-600">Funds secured in escrow · Released on delivery</span>
+                  {/* Marketplace header */}
+                  <div className="px-3 py-2">
+                    <p className="text-[9px] font-black text-gray-900 mb-1">Fresh Produce</p>
+                    <div className="flex gap-1 mb-2">
+                      {["All", "Veg", "Grains"].map((t, i) => (
+                        <span key={t} className="text-[7px] font-bold px-1.5 py-0.5 rounded-full"
+                          style={{ background: i === 0 ? "#2D7A3A" : "#f3f4f6", color: i === 0 ? "white" : "#6b7280" }}>{t}</span>
+                      ))}
+                    </div>
+                    {/* Product cards */}
+                    {[
+                      { name: "Tumatir (Tomato)", price: "₦380/kg", img: "https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=60&h=60&fit=crop" },
+                      { name: "Wake (Cowpea)", price: "₦520/kg", img: "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=60&h=60&fit=crop" },
+                      { name: "Ope (Pineapple)", price: "₦850/kg", img: "https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=60&h=60&fit=crop" },
+                    ].map((p) => (
+                      <div key={p.name} className="flex items-center gap-2 mb-2 p-1.5 rounded-lg bg-gray-50">
+                        <img src={p.img} alt={p.name} className="w-8 h-8 rounded-lg object-cover shrink-0" />
+                        <div className="flex-1 min-w-0">
+                          <p className="text-[8px] font-bold text-gray-900 truncate">{p.name}</p>
+                          <p className="text-[8px] text-primary-600 font-black">{p.price}</p>
+                        </div>
+                        <button className="shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-white text-xs font-bold"
+                          style={{ background: "#2D7A3A" }}>+</button>
+                      </div>
+                    ))}
+                  </div>
+                  {/* Bottom nav */}
+                  <div className="border-t border-gray-100 flex justify-around py-2 px-2">
+                    {["🏠", "🛒", "📊", "👤"].map((icon, i) => (
+                      <div key={i} className="flex flex-col items-center gap-0.5">
+                        <span className="text-sm">{icon}</span>
+                        {i === 0 && <div className="w-1 h-1 rounded-full bg-primary-500" />}
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -267,9 +359,13 @@ export default function HomePage() {
 
           </div>
 
-          {/* Wide LOGISTICS card */}
-          <div className="relative rounded-2xl overflow-hidden border border-accent-200 p-8 sm:p-10 mt-6"
-            style={{ background: "linear-gradient(135deg, rgba(245,166,35,0.05) 0%, rgba(245,166,35,0.02) 100%)" }}>
+          {/* Bottom: LOGISTICS wide card */}
+          <div className="relative rounded-2xl overflow-hidden border border-accent-200 p-7 sm:p-9 mt-3"
+            style={{
+              background: "#fffbf0",
+              backgroundImage: "radial-gradient(circle, #fde68a 1px, transparent 1px)",
+              backgroundSize: "22px 22px",
+            }}>
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
               <div>
                 <p className="text-[10px] font-black tracking-[0.2em] text-accent-600 uppercase mb-3">AGROLYNC LOGISTICS</p>
@@ -286,7 +382,7 @@ export default function HomePage() {
               </div>
             </div>
             <div className="absolute top-5 right-6">
-              <div className="w-10 h-10 rounded-xl icon-gradient-gold flex items-center justify-center">
+              <div className="w-10 h-10 rounded-xl bg-white shadow-sm flex items-center justify-center">
                 <Truck size={20} className="text-accent-600" />
               </div>
             </div>
