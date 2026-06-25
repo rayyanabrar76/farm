@@ -201,8 +201,11 @@ export default function HeroSlider() {
                 onMouseLeave={() => setTilt({ x: 0, y: 0 })}
                 style={{
                   width: 230,
-                  transition: "transform 0.12s ease",
-                  transform: `perspective(1000px) rotateY(${-8 + tilt.x}deg) rotateX(${4 + tilt.y}deg)`,
+                  transition: "transform 0.15s ease",
+                  transform: `perspective(1000px) rotateY(${tilt.x}deg) rotateX(${tilt.y}deg)`,
+                  willChange: "transform",
+                  WebkitBackfaceVisibility: "hidden",
+                  backfaceVisibility: "hidden",
                 }}
               >
                 {/* Phone shell */}
@@ -217,7 +220,7 @@ export default function HeroSlider() {
                   </div>
 
                   {/* Screen */}
-                  <div className="absolute inset-0 overflow-hidden" style={{ borderRadius: 38, background: "#f9fafb" }}>
+                  <div className="absolute inset-0 overflow-hidden" style={{ borderRadius: 38, background: "#f9fafb", WebkitFontSmoothing: "antialiased" }}>
 
                     {/* App header */}
                     <div className="px-4 pt-12 pb-2.5 flex items-center justify-between bg-white border-b border-gray-100">
