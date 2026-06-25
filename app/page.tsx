@@ -295,12 +295,12 @@ export default function HomePage() {
       </section>
 
       {/* ── OUR INDUSTRY PARTNERS ── */}
-      <section className="py-16 sm:py-20 px-4 border-t border-gray-100 bg-white">
+      <section className="py-16 sm:py-20 px-6 border-t border-gray-100 bg-white">
         <div className="max-w-7xl mx-auto">
-          <p className="text-center text-xs font-black tracking-[0.25em] text-gray-400 uppercase mb-12">Our Industry Partners</p>
-          <div className="flex flex-wrap items-center justify-center gap-x-10 sm:gap-x-16 gap-y-6 sm:gap-y-8">
+          <p className="text-center text-base sm:text-lg font-black tracking-[0.18em] text-gray-900 uppercase mb-12">Our Industry Partners</p>
+          <div className="flex flex-wrap items-center justify-center gap-x-12 sm:gap-x-20 gap-y-8">
             {PARTNERS.map((p) => (
-              <span key={p} className="text-2xl sm:text-3xl font-black text-gray-700 hover:text-gray-950 transition-colors duration-200 cursor-default select-none tracking-tight">{p}</span>
+              <span key={p} className="text-3xl sm:text-4xl font-black text-gray-800 hover:text-black transition-colors duration-200 cursor-default select-none tracking-tight">{p}</span>
             ))}
           </div>
         </div>
