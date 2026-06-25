@@ -40,7 +40,7 @@ export default function ProductDetailPage() {
 
   return (
     <>
-      <div className="pt-[100px] pb-0">
+      <div className="pt-25 pb-0">
         {/* Breadcrumb */}
         <div className="max-w-7xl mx-auto px-4 py-5">
           <Link href="/marketplace" className="inline-flex items-center gap-2 text-sm font-semibold text-gray-500 hover:text-primary-500 transition-colors">
@@ -207,7 +207,7 @@ export default function ProductDetailPage() {
           {related.length > 0 && (
             <div className="mt-16">
               <h2 className="text-2xl font-black text-gray-900 mb-6">More {product.category}</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-5">
                 {related.map((p) => <ProductCard key={p.id} product={p} />)}
               </div>
             </div>
