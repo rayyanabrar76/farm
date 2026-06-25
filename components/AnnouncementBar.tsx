@@ -20,8 +20,7 @@ export default function AnnouncementBar() {
   return (
     <div
       className="relative flex items-center overflow-hidden text-white text-xs font-semibold w-full"
-      style={{ height: 36 }}
-      style={{ background: "linear-gradient(90deg, #1B5E28 0%, #2D7A3A 50%, #1B5E28 100%)" }}
+      style={{ height: 36, background: "linear-gradient(90deg, #1B5E28 0%, #2D7A3A 50%, #1B5E28 100%)" }}
     >
 
       {/* Scrolling text */}
