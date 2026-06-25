@@ -69,12 +69,6 @@ const GRID_SECTIONS = [
     href: "/marketplace?cat=Grains",
     ids: [2, 3, 10, 12],
   },
-  {
-    title: "Fruits, Legumes & Cash Crops",
-    label: "Wake · Ope Oyibo · Koko · Ogede Agbagba",
-    href: "/marketplace?cat=Fruits",
-    ids: [5, 6, 7, 11],
-  },
 ];
 
 export default function HomePage() {
@@ -290,7 +284,7 @@ export default function HomePage() {
             {/* RIGHT COL: Big phone mockup */}
             <div className="flex items-center justify-center lg:justify-end py-4 lg:py-0 lg:-mr-4">
               {/* Phone frame */}
-              <div className="relative w-[300px] shrink-0"
+              <div className="relative w-75 shrink-0"
                 style={{
                   background: "#111",
                   borderRadius: "48px",
