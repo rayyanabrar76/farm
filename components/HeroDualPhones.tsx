@@ -1,242 +1,184 @@
 "use client";
-import Link from "next/link";
-import { useState, useEffect } from "react";
-import { ArrowUpRight, Globe, Play } from "lucide-react";
-import Logo from "./Logo";
-import clsx from "clsx";
+import {
+  Bell, ArrowLeft, Search, Package, Truck, Send, LayoutGrid,
+  Home, BarChart3, LifeBuoy, Settings, ArrowDownLeft,
+} from "lucide-react";
 
-// ──────────────────────────────────────────────────────────────────────────
-// "Editorial agritech house" navigation — a complete departure from the
-// dropdown bar. A slim centered-wordmark rail; the real navigation lives in a
-// full-screen immersive overlay where the three personas read as oversized
-// serif statements. Harvest-gold appears exactly once (the CTA). A 2px gold
-// hairline pinned to the top edge is the brand signature.
-//
-// Buyer flow stays request-only — Cart/checkout intentionally unlinked.
-// ──────────────────────────────────────────────────────────────────────────
+/* Two-phone hero composition (Kasuwa-style): a wallet phone in front and an
+   orders phone angled behind. Each phone gently floats (mkFloat), with rotation
+   on an outer wrapper so the float's translate composes cleanly. Frozen under
+   prefers-reduced-motion via the .persona-phone rule in globals.css. */
 
-const GOLD = "linear-gradient(135deg,#E2C27D 0%,#C49A4A 55%,#B0863A 100%)";
-
-// The three ways into Agrolync — parallel paths, not a sequence (so no 01/02/03).
-const PATHS = [
-  { tag: "For growers", title: "Grow & sell your harvest",   href: "/register" },
-  { tag: "For buyers",  title: "Source produce at scale",    href: "/marketplace" },
-  { tag: "For vendors", title: "Supply inputs & logistics",  href: "/register" },
+const QUICK = [
+  { Icon: Package, label: "Orders" },
+  { Icon: Truck, label: "Delivery" },
+  { Icon: Send, label: "Send" },
+  { Icon: LayoutGrid, label: "More" },
 ];
 
-// Everything else, set quietly beside the headline paths.
-const EXPLORE: { label: string; href: string; soon?: boolean }[] = [
-  { label: "Marketplace",  href: "/marketplace" },
-  { label: "About us",     href: "/#about" },
-  { label: "How it works", href: "/#how" },
-  { label: "Help Centre",  href: "/#help" },
-  { label: "Blog",         href: "/#blog" },
-  { label: "Newsroom",     href: "/#news" },
-  { label: "Gallery",      href: "/#gallery" },
-  { label: "Ebooks",       href: "/#ebooks", soon: true },
-  { label: "Events",       href: "/#events", soon: true },
-  { label: "Contact",      href: "/#contact" },
+const TX = [
+  { name: "agriarche limited", date: "Thu Nov 16, 11:08am", amt: "₦100" },
+  { name: "agriarche limited", date: "Thu Nov 16, 9:30am", amt: "₦100" },
+  { name: "olatunde petwilson", date: "Mon Nov 13, 9:07am", amt: "₦500" },
 ];
 
-export default function Nav() {
-  const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+const ORDERS = [
+  { name: "Maize",        status: "Available", color: "#E0820A" },
+  { name: "Sorghum",      status: "Accepted",  color: "#1A8A3A" },
+  { name: "Cashew",       status: "Closed",    color: "#DC2626" },
+  { name: "Rice paddy",   status: "Available", color: "#E0820A" },
+  { name: "Sesame seeds", status: "Available", color: "#E0820A" },
+  { name: "Almond",       status: "Accepted",  color: "#1A8A3A" },
+];
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  // Lock scroll + allow Escape to close the overlay.
-  useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
-    window.addEventListener("keydown", onKey);
-    return () => { document.body.style.overflow = ""; window.removeEventListener("keydown", onKey); };
-  }, [open]);
-
-  // When the overlay is open the rail text flips to light (it floats above it).
-  const railText = open ? "text-white" : "text-gray-800";
-
+function Phone({
+  w, h, rotate, z, delay, posClass, children,
+}: {
+  w: number; h: number; rotate: number; z: number; delay: string; posClass: string; children: React.ReactNode;
+}) {
   return (
-    <>
-      {/* Brand signature: a hairline of harvest-gold pinned to the very top. */}
-      <div className="fixed top-0 inset-x-0 h-0.5 z-60" style={{ background: GOLD }} />
-
-      {/* ── Slim centered-wordmark rail ── */}
-      <header
-        className={clsx(
-          "fixed top-0.5 inset-x-0 z-50 transition-colors duration-300 motion-reduce:transition-none",
-          open
-            ? "bg-transparent"
-            : scrolled
-              ? "bg-white/80 backdrop-blur-xl border-b border-black/6"
-              : "bg-transparent",
-        )}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 grid grid-cols-[1fr_auto_1fr] items-center gap-2">
-
-          {/* Left — the only trigger. A morphing burger + word. */}
-          <button
-            onClick={() => setOpen(!open)}
-            aria-expanded={open}
-            aria-label={open ? "Close menu" : "Open menu"}
-            className={clsx("group justify-self-start flex items-center gap-3 rounded-full -ml-1 px-1 h-11 transition-colors", railText)}
-          >
-            <span className="relative w-6 h-4 shrink-0" aria-hidden>
-              <span className={clsx(
-                "absolute left-0 right-0 h-0.5 rounded-full bg-current transition-all duration-300 motion-reduce:transition-none",
-                open ? "top-1/2 -translate-y-1/2 rotate-45" : "top-0 group-hover:top-0.5",
-              )} />
-              <span className={clsx(
-                "absolute left-0 right-0 h-0.5 rounded-full bg-current transition-all duration-300 motion-reduce:transition-none",
-                open ? "bottom-1/2 translate-y-1/2 -rotate-45" : "bottom-0 group-hover:bottom-0.5",
-              )} />
-            </span>
-            <span className="hidden sm:inline text-[13px] font-bold tracking-[0.12em] uppercase">
-              {open ? "Close" : "Menu"}
-            </span>
-          </button>
-
-          {/* Center — wordmark. */}
-          <Link href="/" aria-label="Agrolync home"
-            className="justify-self-center transition-transform duration-300 hover:scale-[1.04] motion-reduce:transform-none"
-            onClick={() => setOpen(false)}>
-            <span className={open ? "**:fill-white **:text-white" : undefined}>
-              <Logo height={36} />
-            </span>
-          </Link>
-
-          {/* Right — account actions. */}
-          <div className="justify-self-end flex items-center gap-2 sm:gap-4">
-            <Link href="/login"
-              className={clsx("hidden sm:inline text-[13px] font-bold tracking-[0.12em] uppercase transition-colors hover:opacity-70", railText)}>
-              Log in
-            </Link>
-            <Link href="/register"
-              className="inline-flex items-center gap-1.5 px-4 sm:px-5 h-10 rounded-full text-[13px] font-bold tracking-[0.04em] transition-all duration-300 hover:-translate-y-0.5 motion-reduce:transform-none"
-              style={{ background: GOLD, color: "#0E2A12", boxShadow: "0 8px 22px -6px rgba(176,134,58,0.5)" }}
-              onClick={() => setOpen(false)}>
-              <span className="sm:hidden">Join</span>
-              <span className="hidden sm:inline">Get started</span>
-              <ArrowUpRight size={15} className="hidden sm:block" />
-            </Link>
+    <div className={`absolute ${posClass}`} style={{ zIndex: z, transform: `rotate(${rotate}deg)` }}>
+      <div style={{ animation: "mkFloat 6.5s ease-in-out infinite", animationDelay: delay }}>
+        <div className="relative rounded-[1.9rem] p-1.25" style={{ background: "#141414", boxShadow: "0 28px 60px rgba(0,0,0,0.32)" }}>
+          <div className="absolute top-2 left-1/2 -translate-x-1/2 w-11 h-3 bg-black rounded-full z-20" />
+          <div className="relative bg-white rounded-[1.55rem] overflow-hidden" style={{ width: w, height: h }}>
+            {children}
           </div>
-        </div>
-      </header>
-
-      {/* ── Full-screen overlay menu ── */}
-      <div
-        className={clsx(
-          "fixed inset-0 z-40 transition-[opacity,visibility] duration-500 motion-reduce:transition-none",
-          open ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none",
-        )}
-        style={{
-          background:
-            "radial-gradient(120% 120% at 80% 0%, #1A5514 0%, #0E2A12 55%, #081B0B 100%)",
-        }}
-      >
-        {/* Ambient pattern + grain, if your global hero-pattern class exists. */}
-        <div className="hero-pattern absolute inset-0 opacity-[0.06]" aria-hidden />
-
-        <div className="relative h-dvh max-w-7xl mx-auto px-5 sm:px-6 pt-20 sm:pt-28 overflow-y-auto overscroll-contain flex flex-col pb-[max(2rem,env(safe-area-inset-bottom))]">
-          <div className="flex-1 grid lg:grid-cols-[1.5fr_1fr] gap-8 lg:gap-20">
-
-            {/* Paths — oversized serif statements, staggered reveal. */}
-            <div>
-              <Eyebrow open={open} delay={60}>Where do you fit</Eyebrow>
-              <ul className="mt-6 sm:mt-8 space-y-2 sm:space-y-3">
-                {PATHS.map((p, i) => (
-                  <li key={p.title}>
-                    <Reveal open={open} delay={120 + i * 80}>
-                      <Link href={p.href} onClick={() => setOpen(false)}
-                        className="group block py-2 sm:py-3">
-                        <span className="block text-[12px] font-bold tracking-[0.16em] uppercase text-[#C49A4A]">{p.tag}</span>
-                        <span className="mt-1 flex items-start gap-2 sm:gap-5">
-                          <span className="min-w-0 font-serif text-[clamp(1.875rem,7.5vw,4.25rem)] leading-[1.05] text-white/90 transition-colors group-hover:text-white">
-                            {p.title}
-                          </span>
-                          <ArrowUpRight
-                            className="shrink-0 mt-1.5 sm:mt-3 w-6 h-6 sm:w-9 sm:h-9 text-white/30 transition-all duration-300 group-hover:text-[#E2C27D] group-hover:translate-x-1 group-hover:-translate-y-1 motion-reduce:transform-none"
-                            strokeWidth={1.5} />
-                        </span>
-                      </Link>
-                    </Reveal>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Explore — quiet utility column. */}
-            <div className="border-t border-white/10 pt-8 mt-2 lg:border-t-0 lg:pt-0 lg:mt-0 lg:border-l lg:border-white/10 lg:pl-16">
-              <Eyebrow open={open} delay={260}>Explore</Eyebrow>
-              <ul className="mt-6 sm:mt-8 grid grid-cols-2 lg:grid-cols-1 gap-x-8 gap-y-1">
-                {EXPLORE.map((it, i) => (
-                  <li key={it.label}>
-                    <Reveal open={open} delay={300 + i * 35}>
-                      <Link href={it.href} onClick={() => setOpen(false)}
-                        className="group flex items-baseline gap-2 py-2.5 text-white/70 hover:text-white transition-colors">
-                        <span className="text-[15px] sm:text-base font-medium">{it.label}</span>
-                        {it.soon && <span className="text-[10px] font-bold tracking-wide uppercase text-[#C49A4A]">Soon</span>}
-                      </Link>
-                    </Reveal>
-                  </li>
-                ))}
-              </ul>
-
-              {/* Brand story tile. */}
-              <Reveal open={open} delay={680}>
-                <Link href="/#story" onClick={() => setOpen(false)}
-                  className="group mt-8 flex items-center gap-3 text-white/70 hover:text-white transition-colors">
-                  <span className="grid place-items-center w-10 h-10 rounded-full bg-white/10 group-hover:bg-white/20 transition-colors">
-                    <Play size={15} className="text-white fill-white ml-0.5" />
-                  </span>
-                  <span className="text-sm font-semibold">Watch our brand story</span>
-                </Link>
-              </Reveal>
-            </div>
-          </div>
-
-          {/* Overlay footer. */}
-          <Reveal open={open} delay={760}>
-            <div className="mt-10 pt-6 border-t border-white/10 flex flex-wrap items-center gap-x-6 gap-y-3 text-white/50">
-              <button className="flex items-center gap-1.5 text-[13px] font-semibold tracking-wide hover:text-white transition-colors">
-                <Globe size={14} /> English
-              </button>
-              <a href="mailto:hello@agrolync.com" className="text-[13px] font-medium hover:text-white transition-colors">
-                hello@agrolync.com
-              </a>
-              <span className="hidden sm:inline sm:ml-auto text-[11px] tracking-[0.14em] uppercase">Farm to market · West Africa</span>
-            </div>
-          </Reveal>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
-// Small uppercase label that fades+rises with the overlay.
-function Eyebrow({ children, open, delay }: { children: React.ReactNode; open: boolean; delay: number }) {
+function StatusBar() {
   return (
-    <Reveal open={open} delay={delay}>
-      <p className="text-[11px] font-bold tracking-[0.2em] uppercase text-white/40">{children}</p>
-    </Reveal>
+    <div className="h-7 flex items-end justify-between px-3.5 pb-1">
+      <span className="text-[8px] font-bold text-gray-900">9:41</span>
+      <span className="text-[7px] text-gray-500">▦ ▮ 100%</span>
+    </div>
   );
 }
 
-// Staggered reveal wrapper — translate-up + fade, keyed off `open` and `delay`.
-function Reveal({ children, open, delay }: { children: React.ReactNode; open: boolean; delay: number }) {
+function WalletScreen() {
   return (
-    <div
-      className={clsx(
-        "transition-all duration-600 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none motion-reduce:transform-none",
-        open ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5",
-      )}
-      style={{ transitionDelay: open ? `${delay}ms` : "0ms" }}
-    >
-      {children}
+    <div className="h-full flex flex-col">
+      <StatusBar />
+      <div className="px-3.5 pt-1 flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <div className="w-7 h-7 rounded-full bg-linear-to-br from-primary-200 to-primary-400" />
+          <div className="leading-none">
+            <p className="text-[7px] text-gray-400">Hello,</p>
+            <p className="text-[11px] font-black text-gray-900">Test</p>
+          </div>
+        </div>
+        <Bell size={13} className="text-gray-400" />
+      </div>
+
+      {/* balance card */}
+      <div className="mx-3.5 mt-2.5 rounded-2xl p-3 text-white relative overflow-hidden" style={{ background: "linear-gradient(135deg,#F5A623,#E0820A)" }}>
+        <p className="text-[15px] font-black">₦1,046.9</p>
+        <div className="flex justify-between mt-3.5 text-[7px]">
+          <div><p className="opacity-75">Account Status</p><p className="font-bold mt-0.5">ACTIVE</p></div>
+          <div className="text-right"><p className="opacity-75">Account Number</p><p className="font-bold mt-0.5">8900355016</p></div>
+        </div>
+      </div>
+
+      {/* quick access */}
+      <div className="px-3.5 mt-3">
+        <p className="text-[9px] font-bold text-gray-700 mb-2">Quick Access</p>
+        <div className="flex justify-between">
+          {QUICK.map((q) => (
+            <div key={q.label} className="flex flex-col items-center gap-1">
+              <span className="w-8 h-8 rounded-full bg-amber-50 flex items-center justify-center">
+                <q.Icon size={13} style={{ color: "#E0820A" }} />
+              </span>
+              <span className="text-[7px] text-gray-500">{q.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* recent transactions */}
+      <div className="px-3.5 mt-3 flex-1">
+        <div className="flex items-center justify-between mb-2">
+          <p className="text-[9px] font-bold text-gray-700">Recent Transactions</p>
+          <p className="text-[7px] font-bold text-primary-600">See all</p>
+        </div>
+        <div className="space-y-2.5">
+          {TX.map((t, i) => (
+            <div key={i} className="flex items-center gap-2">
+              <span className="w-6 h-6 rounded-full bg-green-50 flex items-center justify-center shrink-0">
+                <ArrowDownLeft size={11} className="text-green-600" />
+              </span>
+              <div className="flex-1 min-w-0">
+                <p className="text-[8px] font-bold text-gray-800 truncate">{t.name}</p>
+                <p className="text-[6.5px] text-gray-400">{t.date}</p>
+              </div>
+              <span className="text-[9px] font-black text-gray-900">{t.amt}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* bottom nav */}
+      <div className="border-t border-gray-100 flex justify-around py-2">
+        {[[Home, true], [BarChart3, false], [LifeBuoy, false], [Settings, false]].map(([Ic, a], i) => {
+          const Icon = Ic as typeof Home;
+          return <Icon key={i} size={13} style={{ color: a ? "#E0820A" : "#cbd5e1" }} />;
+        })}
+      </div>
+    </div>
+  );
+}
+
+function OrdersScreen() {
+  return (
+    <div className="h-full flex flex-col">
+      <StatusBar />
+      <div className="px-3.5 pt-1 flex items-center justify-between border-b border-gray-100 pb-2.5">
+        <div className="flex items-center gap-2">
+          <ArrowLeft size={13} className="text-gray-700" />
+          <span className="text-[12px] font-black text-gray-900">Orders</span>
+        </div>
+      </div>
+      <div className="px-3.5 py-2.5">
+        <div className="flex items-center gap-1.5 bg-gray-50 rounded-lg px-2.5 py-1.5">
+          <Search size={11} className="text-gray-400" />
+          <span className="text-[8px] text-gray-400">Name, commodity, price</span>
+        </div>
+      </div>
+      <div className="px-3.5 flex-1 overflow-hidden">
+        {ORDERS.map((o) => (
+          <div key={o.name} className="flex items-center justify-between py-2.5 border-b border-gray-50">
+            <div className="flex items-center gap-2">
+              <span className="w-7 h-7 rounded-lg bg-gray-100" />
+              <div className="leading-tight">
+                <p className="text-[9px] font-bold text-gray-900">{o.name}</p>
+                <p className="text-[6.5px] text-gray-400">Mubi, Adamawa</p>
+              </div>
+            </div>
+            <div className="text-right">
+              <p className="text-[8px] font-black" style={{ color: o.color }}>{o.status}</p>
+              <p className="text-[8px] font-bold text-gray-700 mt-0.5">₦345/KG</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default function HeroDualPhones() {
+  return (
+    <div className="persona-phone relative scale-[0.78] xs:scale-90 sm:scale-100" style={{ width: 340, height: 430 }}>
+      {/* Back phone — Orders, angled right */}
+      <Phone w={184} h={392} rotate={7} z={10} delay="0s" posClass="right-0 top-0">
+        <OrdersScreen />
+      </Phone>
+      {/* Front phone — Wallet, angled left */}
+      <Phone w={196} h={404} rotate={-5} z={20} delay="0.7s" posClass="left-0 top-6">
+        <WalletScreen />
+      </Phone>
     </div>
   );
 }

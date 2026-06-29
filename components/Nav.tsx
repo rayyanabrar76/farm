@@ -104,7 +104,7 @@ export default function Nav() {
           <Link href="/" aria-label="Agrolync home"
             className="justify-self-center transition-transform duration-300 hover:scale-[1.04] motion-reduce:transform-none"
             onClick={() => setOpen(false)}>
-            <span className={open ? "**:fill-white_*]:text-white" : undefined}>
+            <span className={open ? "**:fill-white **:text-white" : undefined}>
               <Logo height={36} />
             </span>
           </Link>
