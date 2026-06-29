@@ -51,13 +51,13 @@ export default function Footer() {
               <p className="text-white/50 text-sm mt-1 max-w-md">Weekly commodity price alerts and agri-market insights — straight to your inbox.</p>
             </div>
           </div>
-          <div className="flex gap-2 w-full md:w-auto">
+          <div className="flex flex-col xs:flex-row gap-2 w-full md:w-auto">
             <input
               type="email"
               placeholder="your@email.com"
-              className="flex-1 md:w-60 bg-white/8 border border-white/12 text-white placeholder:text-white/30 text-sm px-4 py-3 rounded-xl outline-none focus:border-accent-400 focus:bg-white/12 transition-colors"
+              className="w-full xs:flex-1 md:w-60 bg-white/8 border border-white/12 text-white placeholder:text-white/30 text-sm px-4 py-3 rounded-xl outline-none focus:border-accent-400 focus:bg-white/12 transition-colors"
             />
-            <button className="flex items-center gap-1.5 px-5 py-3 text-gray-900 font-bold text-sm rounded-xl transition-all hover:-translate-y-0.5 shrink-0" style={{ background: "linear-gradient(135deg,#FFD17A,#F5A623)", boxShadow: "0 6px 18px rgba(245,166,35,0.35)" }}>
+            <button className="flex items-center justify-center gap-1.5 px-5 py-3 text-gray-900 font-bold text-sm rounded-xl transition-all hover:-translate-y-0.5 shrink-0 w-full xs:w-auto" style={{ background: "linear-gradient(135deg,#FFD17A,#F5A623)", boxShadow: "0 6px 18px rgba(245,166,35,0.35)" }}>
               Subscribe <ArrowRight size={14} />
             </button>
           </div>
@@ -133,9 +133,9 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-white/8 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/35">
+        <div className="border-t border-white/8 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/35 text-center sm:text-left">
           <span>© 2026 Agrolync Africa Ltd. All rights reserved.</span>
-          <div className="flex gap-5">
+          <div className="flex flex-wrap justify-center gap-x-5 gap-y-1.5">
             {["Privacy Policy", "Terms of Service", "Cookie Policy"].map((l) => (
               <Link key={l} href="#" className="hover:text-white/70 transition-colors">{l}</Link>
             ))}
@@ -144,10 +144,10 @@ export default function Footer() {
       </div>
 
       {/* Oversized wordmark watermark */}
-      <div className="relative h-14 sm:h-24 pointer-events-none select-none">
+      <div className="relative h-12 sm:h-24 pointer-events-none select-none">
         <p
-          className="absolute left-1/2 -translate-x-1/2 whitespace-nowrap font-black leading-none text-white/[0.035] text-[22vw]"
-          style={{ fontFamily: "'Baloo 2', system-ui, sans-serif", bottom: "-0.18em" }}
+          className="absolute left-1/2 -translate-x-1/2 whitespace-nowrap font-black leading-none text-white/[0.035] text-[19vw] sm:text-[22vw]"
+          style={{ fontFamily: "'Baloo 2', system-ui, sans-serif", bottom: "-0.16em" }}
         >
           agrolync
         </p>

@@ -63,35 +63,35 @@ export default function Nav() {
   return (
     <>
       {/* Brand signature: a hairline of harvest-gold pinned to the very top. */}
-      <div className="fixed top-0 inset-x-0 h-[2px] z-[60]" style={{ background: GOLD }} />
+      <div className="fixed top-0 inset-x-0 h-0.5 z-60" style={{ background: GOLD }} />
 
       {/* ── Slim centered-wordmark rail ── */}
       <header
         className={clsx(
-          "fixed top-[2px] inset-x-0 z-50 transition-colors duration-300 motion-reduce:transition-none",
+          "fixed top-0.5 inset-x-0 z-50 transition-colors duration-300 motion-reduce:transition-none",
           open
             ? "bg-transparent"
             : scrolled
-              ? "bg-white/80 backdrop-blur-xl border-b border-black/[0.06]"
+              ? "bg-white/80 backdrop-blur-xl border-b border-black/6"
               : "bg-transparent",
         )}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-18 grid grid-cols-[1fr_auto_1fr] items-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 grid grid-cols-[1fr_auto_1fr] items-center gap-2">
 
           {/* Left — the only trigger. A morphing burger + word. */}
           <button
             onClick={() => setOpen(!open)}
             aria-expanded={open}
             aria-label={open ? "Close menu" : "Open menu"}
-            className={clsx("group justify-self-start flex items-center gap-3 rounded-full -ml-1 px-1 py-1 transition-colors", railText)}
+            className={clsx("group justify-self-start flex items-center gap-3 rounded-full -ml-1 px-1 h-11 transition-colors", railText)}
           >
             <span className="relative w-6 h-4 shrink-0" aria-hidden>
               <span className={clsx(
-                "absolute left-0 right-0 h-[2px] rounded-full bg-current transition-all duration-300 motion-reduce:transition-none",
+                "absolute left-0 right-0 h-0.5 rounded-full bg-current transition-all duration-300 motion-reduce:transition-none",
                 open ? "top-1/2 -translate-y-1/2 rotate-45" : "top-0 group-hover:top-0.5",
               )} />
               <span className={clsx(
-                "absolute left-0 right-0 h-[2px] rounded-full bg-current transition-all duration-300 motion-reduce:transition-none",
+                "absolute left-0 right-0 h-0.5 rounded-full bg-current transition-all duration-300 motion-reduce:transition-none",
                 open ? "bottom-1/2 translate-y-1/2 -rotate-45" : "bottom-0 group-hover:bottom-0.5",
               )} />
             </span>
@@ -104,7 +104,7 @@ export default function Nav() {
           <Link href="/" aria-label="Agrolync home"
             className="justify-self-center transition-transform duration-300 hover:scale-[1.04] motion-reduce:transform-none"
             onClick={() => setOpen(false)}>
-            <span className={open ? "[&_*]:fill-white [&_*]:text-white" : undefined}>
+            <span className={open ? "**:fill-white_*]:text-white" : undefined}>
               <Logo height={36} />
             </span>
           </Link>
@@ -116,11 +116,12 @@ export default function Nav() {
               Log in
             </Link>
             <Link href="/register"
-              className="inline-flex items-center gap-1.5 px-4 sm:px-5 py-2.5 rounded-full text-[13px] font-bold tracking-[0.04em] transition-all duration-300 hover:-translate-y-0.5 motion-reduce:transform-none"
+              className="inline-flex items-center gap-1.5 px-4 sm:px-5 h-10 rounded-full text-[13px] font-bold tracking-[0.04em] transition-all duration-300 hover:-translate-y-0.5 motion-reduce:transform-none"
               style={{ background: GOLD, color: "#0E2A12", boxShadow: "0 8px 22px -6px rgba(176,134,58,0.5)" }}
               onClick={() => setOpen(false)}>
-              Get started
-              <ArrowUpRight size={15} />
+              <span className="sm:hidden">Join</span>
+              <span className="hidden sm:inline">Get started</span>
+              <ArrowUpRight size={15} className="hidden sm:block" />
             </Link>
           </div>
         </div>
@@ -140,8 +141,8 @@ export default function Nav() {
         {/* Ambient pattern + grain, if your global hero-pattern class exists. */}
         <div className="hero-pattern absolute inset-0 opacity-[0.06]" aria-hidden />
 
-        <div className="relative h-full max-w-7xl mx-auto px-4 sm:px-6 pt-24 sm:pt-28 pb-10 overflow-y-auto flex flex-col">
-          <div className="flex-1 grid lg:grid-cols-[1.5fr_1fr] gap-12 lg:gap-20">
+        <div className="relative h-dvh max-w-7xl mx-auto px-5 sm:px-6 pt-20 sm:pt-28 overflow-y-auto overscroll-contain flex flex-col pb-[max(2rem,env(safe-area-inset-bottom))]">
+          <div className="flex-1 grid lg:grid-cols-[1.5fr_1fr] gap-8 lg:gap-20">
 
             {/* Paths — oversized serif statements, staggered reveal. */}
             <div>
@@ -153,13 +154,13 @@ export default function Nav() {
                       <Link href={p.href} onClick={() => setOpen(false)}
                         className="group block py-2 sm:py-3">
                         <span className="block text-[12px] font-bold tracking-[0.16em] uppercase text-[#C49A4A]">{p.tag}</span>
-                        <span className="mt-1 flex items-center gap-3 sm:gap-5">
-                          <span className="font-serif text-[clamp(2rem,6vw,4.25rem)] leading-[1.02] text-white/90 transition-colors group-hover:text-white">
+                        <span className="mt-1 flex items-start gap-2 sm:gap-5">
+                          <span className="min-w-0 font-serif text-[clamp(1.875rem,7.5vw,4.25rem)] leading-[1.05] text-white/90 transition-colors group-hover:text-white">
                             {p.title}
                           </span>
                           <ArrowUpRight
-                            className="shrink-0 text-white/30 transition-all duration-300 group-hover:text-[#E2C27D] group-hover:translate-x-1 group-hover:-translate-y-1 motion-reduce:transform-none"
-                            size={34} strokeWidth={1.5} />
+                            className="shrink-0 mt-1.5 sm:mt-3 w-6 h-6 sm:w-9 sm:h-9 text-white/30 transition-all duration-300 group-hover:text-[#E2C27D] group-hover:translate-x-1 group-hover:-translate-y-1 motion-reduce:transform-none"
+                            strokeWidth={1.5} />
                         </span>
                       </Link>
                     </Reveal>
@@ -169,14 +170,14 @@ export default function Nav() {
             </div>
 
             {/* Explore — quiet utility column. */}
-            <div className="lg:border-l lg:border-white/10 lg:pl-16">
+            <div className="border-t border-white/10 pt-8 mt-2 lg:border-t-0 lg:pt-0 lg:mt-0 lg:border-l lg:border-white/10 lg:pl-16">
               <Eyebrow open={open} delay={260}>Explore</Eyebrow>
               <ul className="mt-6 sm:mt-8 grid grid-cols-2 lg:grid-cols-1 gap-x-8 gap-y-1">
                 {EXPLORE.map((it, i) => (
                   <li key={it.label}>
                     <Reveal open={open} delay={300 + i * 35}>
                       <Link href={it.href} onClick={() => setOpen(false)}
-                        className="group flex items-baseline gap-2 py-2 text-white/70 hover:text-white transition-colors">
+                        className="group flex items-baseline gap-2 py-2.5 text-white/70 hover:text-white transition-colors">
                         <span className="text-[15px] sm:text-base font-medium">{it.label}</span>
                         {it.soon && <span className="text-[10px] font-bold tracking-wide uppercase text-[#C49A4A]">Soon</span>}
                       </Link>
@@ -200,14 +201,14 @@ export default function Nav() {
 
           {/* Overlay footer. */}
           <Reveal open={open} delay={760}>
-            <div className="mt-12 pt-6 border-t border-white/10 flex flex-wrap items-center justify-between gap-4 text-white/50">
+            <div className="mt-10 pt-6 border-t border-white/10 flex flex-wrap items-center gap-x-6 gap-y-3 text-white/50">
               <button className="flex items-center gap-1.5 text-[13px] font-semibold tracking-wide hover:text-white transition-colors">
                 <Globe size={14} /> English
               </button>
               <a href="mailto:hello@agrolync.com" className="text-[13px] font-medium hover:text-white transition-colors">
                 hello@agrolync.com
               </a>
-              <span className="text-[11px] tracking-[0.14em] uppercase">Farm to market · West Africa</span>
+              <span className="hidden sm:inline sm:ml-auto text-[11px] tracking-[0.14em] uppercase">Farm to market · West Africa</span>
             </div>
           </Reveal>
         </div>
@@ -230,7 +231,7 @@ function Reveal({ children, open, delay }: { children: React.ReactNode; open: bo
   return (
     <div
       className={clsx(
-        "transition-all duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none motion-reduce:transform-none",
+        "transition-all duration-600 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none motion-reduce:transform-none",
         open ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5",
       )}
       style={{ transitionDelay: open ? `${delay}ms` : "0ms" }}
