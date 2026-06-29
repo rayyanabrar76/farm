@@ -1,40 +1,29 @@
 "use client";
-import { useParams, notFound, useRouter } from "next/navigation";
+import { useParams, notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { ArrowLeft, Star, MapPin, ShieldCheck, Minus, Plus, ShoppingCart, Zap, CheckCircle, Award, Leaf, MessageCircle } from "lucide-react";
+import { ArrowLeft, Star, MapPin, ShieldCheck, Minus, Plus, Package, CheckCircle, Award, Leaf, MessageCircle } from "lucide-react";
 import { PRODUCTS, CATEGORY_ICON } from "@/lib/data";
-import { useCart } from "@/context/CartContext";
-import { useToast } from "@/context/ToastContext";
 import Footer from "@/components/Footer";
 import ProductCard from "@/components/ProductCard";
 import ChatModal from "@/components/ChatModal";
+import OrderRequestModal from "@/components/OrderRequestModal";
 
 export default function ProductDetailPage() {
   const params = useParams();
   const id = Number(params.id);
   const product = PRODUCTS.find((p) => p.id === id);
-  if (!product) return notFound();
 
-  const { addItem } = useCart();
-  const { showToast } = useToast();
-  const router = useRouter();
-  const [qty, setQty] = useState(product.minOrder);
+  // Hooks must run on every render — declare them before any early return.
+  const [qty, setQty] = useState(product?.minOrder ?? 1);
   const [chatOpen, setChatOpen] = useState(false);
+  const [requestOpen, setRequestOpen] = useState(false);
+
+  if (!product) return notFound();
 
   const adjustQty = (delta: number) => {
     setQty((prev) => Math.max(product.minOrder, prev + delta));
-  };
-
-  const handleAddToCart = () => {
-    addItem(product, qty);
-    showToast(`${product.name} added to cart`, "success");
-  };
-
-  const handleBuyNow = () => {
-    addItem(product, qty);
-    router.push("/checkout");
   };
 
   const related = PRODUCTS.filter((p) => p.id !== id && p.category === product.category).slice(0, 4);
@@ -85,9 +74,9 @@ export default function ProductDetailPage() {
                 </div>
               </div>
 
-              {/* Description */}
+              {/* Story / provenance */}
               <div className="mt-4 bg-primary-50 rounded-2xl p-5">
-                <p className="text-xs font-bold text-primary-600 mb-2 uppercase tracking-wide">Product Description</p>
+                <p className="text-xs font-bold text-primary-600 mb-2 uppercase tracking-wide">From the farm</p>
                 <p className="text-sm text-gray-700 leading-relaxed">{product.desc}</p>
               </div>
             </div>
@@ -114,19 +103,16 @@ export default function ProductDetailPage() {
                 <span className="text-gray-400 text-sm">({product.reviews} verified reviews)</span>
               </div>
 
-              {/* Price box */}
-              <div className="bg-primary-50 border border-primary-100 rounded-2xl p-5 mb-5">
-                <div className="flex items-baseline gap-2 mb-1.5">
-                  <span className="text-4xl font-black text-primary-500">₦{product.price.toLocaleString()}</span>
-                  <span className="text-gray-400 text-sm font-medium">per {product.unit}</span>
-                </div>
-                <p className="text-xs text-gray-500">Minimum order: <strong>{product.minOrder}kg</strong> · <strong>{product.qty.toLocaleString()}kg</strong> available</p>
-
-                {/* Total calc */}
-                <div className="mt-3 pt-3 border-t border-primary-100 flex items-center justify-between text-sm">
-                  <span className="text-gray-500">Order total ({qty}kg)</span>
-                  <span className="font-black text-primary-600 text-base">₦{(product.price * qty).toLocaleString()}</span>
-                </div>
+              {/* Indicative price — de-emphasized (final price confirmed on request) */}
+              <div className="mb-5">
+                <p className="text-sm text-gray-500">
+                  Indicative price{" "}
+                  <span className="font-semibold text-gray-700">from ₦{product.price.toLocaleString()}</span>
+                  <span className="text-gray-400">/{product.unit}</span>
+                </p>
+                <p className="text-xs text-gray-400 mt-1">
+                  Min. order {product.minOrder}{product.unit} · {product.qty.toLocaleString()}{product.unit} available · final price confirmed with the farmer
+                </p>
               </div>
 
               {/* Availability */}
@@ -180,25 +166,21 @@ export default function ProductDetailPage() {
                 </button>
               </div>
 
-              {/* Actions */}
-              <div className="flex gap-3 mb-5">
-                <button onClick={handleAddToCart}
-                  className="flex-1 flex items-center justify-center gap-2 py-4 border-2 border-primary-500 text-primary-500 hover:bg-primary-50 rounded-2xl font-bold text-sm transition-colors"
+              {/* Action — request only */}
+              <div className="mb-5">
+                <button onClick={() => setRequestOpen(true)}
+                  className="w-full flex items-center justify-center gap-2 py-4 text-white rounded-2xl font-bold text-sm transition-all hover:-translate-y-0.5"
+                  style={{ background: "linear-gradient(135deg,#1A5514,#2D7A3A)", boxShadow: "0 4px 20px rgba(26,85,20,0.28)" }}
                 >
-                  <ShoppingCart size={17} /> Add to Cart
-                </button>
-                <button onClick={handleBuyNow}
-                  className="flex-2 flex items-center justify-center gap-2 py-4 bg-primary-500 hover:bg-primary-600 text-white rounded-2xl font-bold text-sm transition-colors shadow-green"
-                >
-                  <Zap size={17} /> Buy Now
+                  <Package size={17} /> Request this produce
                 </button>
               </div>
 
-              {/* Escrow note */}
-              <div className="flex items-start gap-3 bg-amber-50 border border-amber-100 rounded-xl p-4">
-                <ShieldCheck size={18} className="text-amber-600 shrink-0 mt-0.5" />
-                <p className="text-xs text-amber-800 leading-relaxed">
-                  <strong>Secure Escrow Payment:</strong> Your funds are held safely until delivery is confirmed by both parties. 100% money-back guarantee on quality issues.
+              {/* No-payment request note */}
+              <div className="flex items-start gap-3 bg-primary-50 border border-primary-100 rounded-xl p-4">
+                <ShieldCheck size={18} className="text-primary-600 shrink-0 mt-0.5" />
+                <p className="text-xs text-primary-800 leading-relaxed">
+                  <strong>No payment now.</strong> Send a request and {product.farmer.split(" ")[0]} will contact you directly to confirm availability, pricing and delivery.
                 </p>
               </div>
             </div>
@@ -222,6 +204,12 @@ export default function ProductDetailPage() {
         farmerName={product.farmer}
         farmerInitial={product.farmerInitial}
         produceName={product.name}
+      />
+      <OrderRequestModal
+        open={requestOpen}
+        onClose={() => setRequestOpen(false)}
+        product={product}
+        qty={qty}
       />
     </>
   );

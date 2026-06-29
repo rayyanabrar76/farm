@@ -1,23 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Inter:wght@400;500;600;700;800&family=Baloo+2:wght@500;600;700;800&display=swap');
 @import "tailwindcss";
 
 @theme {
   /* Custom breakpoint for very small mobiles */
   --breakpoint-xs: 480px;
 
-  /* Brand palette */
-  --color-primary-50:  #E8F5E9;
-  --color-primary-100: #C8E6C9;
-  --color-primary-200: #A5D6A7;
-  --color-primary-300: #81C784;
+  /* Brand palette — deep forest greens */
+  --color-primary-50:  #EEF9EE;
+  --color-primary-100: #C5E6C5;
+  --color-primary-200: #9CD39C;
+  --color-primary-300: #72C072;
   --color-primary-400: #4CAF72;
   --color-primary-500: #2D7A3A;
   --color-primary-600: #236130;
-  --color-primary-700: #1B5E28;
-  --color-primary-800: #134520;
-  --color-primary-900: #0A2A10;
+  --color-primary-700: #1A5514;
+  --color-primary-800: #102E0B;
+  --color-primary-900: #071208;
 
-  /* Gold accent */
+  /* Gold accent — harvest gold */
   --color-accent-200: #FFE5A0;
   --color-accent-300: #FFD17A;
   --color-accent-400: #FFB84D;
@@ -25,7 +25,14 @@
   --color-accent-600: #E09200;
   --color-accent-700: #B57200;
 
-  --color-surface: #F7F9F7;
+  /* Earth tones */
+  --color-earth-400: #A67C5B;
+  --color-earth-500: #8B5E3C;
+  --color-earth-600: #6B4226;
+  --color-earth-700: #4A2C18;
+
+  /* Warm parchment surface */
+  --color-surface: #F9F6F0;
 
   /* Shadows */
   --shadow-card:        0 2px 12px rgba(0,0,0,0.05), 0 1px 3px rgba(0,0,0,0.04);
@@ -70,13 +77,119 @@
   75%, 100% { transform: scale(2); opacity: 0; }
 }
 
+/* ── Hero stakeholder-network animations ── */
+@keyframes nodeIn {
+  0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.55); }
+  60%  { opacity: 1; transform: translate(-50%, -50%) scale(1.08); }
+  100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+@keyframes chipIn {
+  0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.4); }
+  100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+@keyframes floatY {
+  0%, 100% { translate: 0 0; }
+  50%      { translate: 0 -7px; }
+}
+@keyframes lineDraw {
+  from { stroke-dashoffset: var(--len, 120); }
+  to   { stroke-dashoffset: 0; }
+}
+@keyframes lineFlow {
+  to { stroke-dashoffset: -60; }
+}
+@keyframes fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Persona showcase: inner stagger (left text + right mockup) ── */
+.persona-reveal {
+  opacity: 0;
+  transition: opacity 0.6s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.persona-text { transform: translateY(26px); }
+.persona-card { transform: translateY(46px); }
+/* When the panel is the active/in-view one, slide its layers home.
+   The mockup waits a touch longer so the two columns layer in. */
+.persona-panel[data-active="true"] .persona-text { opacity: 1; transform: none; transition-delay: 0.08s; }
+.persona-panel[data-active="true"] .persona-card { opacity: 1; transform: none; transition-delay: 0.2s; }
+@media (prefers-reduced-motion: reduce) {
+  .persona-reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+}
+
+/* ── Persona app-mockup motion (looping, CSS-only) ── */
+@keyframes mkFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+@keyframes mkScan  { 0% { transform: translateY(6px); opacity: 0; } 14% { opacity: 1; } 86% { opacity: 1; } 100% { transform: translateY(110px); opacity: 0; } }
+@keyframes mkFill  { 0% { width: 12%; } 55% { width: 88%; } 100% { width: 12%; } }
+@keyframes mkSweep { 0% { transform: translateY(0); opacity: 0; } 8% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(114px); opacity: 0; } }
+@keyframes mkToast { 0% { transform: translateY(-150%); opacity: 0; } 8% { transform: translateY(0); opacity: 1; } 42% { transform: translateY(0); opacity: 1; } 52% { transform: translateY(-150%); opacity: 0; } 100% { transform: translateY(-150%); opacity: 0; } }
+@keyframes mkGrow  { 0%, 100% { transform: scaleY(0.5); } 50% { transform: scaleY(1); } }
+@keyframes mkBlink { 0%, 100% { opacity: 0.35; } 50% { opacity: 1; } }
+@keyframes mkScanX { 0% { left: 0%; opacity: 0; } 12% { opacity: 1; } 88% { opacity: 1; } 100% { left: 100%; opacity: 0; } }
+/* Whole-panel open → hold → close loop (uses the individual `scale` property
+   so it composes with mkFloat's transform: translateY). */
+@keyframes heroPanelCycle {
+  0%   { scale: 0.82; opacity: 0; }
+  12%  { scale: 1.02; opacity: 1; }
+  18%  { scale: 1;    opacity: 1; }
+  82%  { scale: 1;    opacity: 1; }
+  92%  { scale: 0.82; opacity: 0; }
+  100% { scale: 0.82; opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .persona-phone, .persona-phone * { animation: none !important; }
+}
+@keyframes hubPulse {
+  0%, 100% { box-shadow: 0 18px 44px rgba(26,85,20,0.34), 0 0 0 0 rgba(45,122,58,0.30); }
+  50%      { box-shadow: 0 18px 44px rgba(26,85,20,0.34), 0 0 0 16px rgba(45,122,58,0.0); }
+}
+
+/* ── Editorial farm-photo hero — warm, human, alive ── */
+
+/* Gentle breathing float for the photo frame */
+@keyframes heroFrameFloat {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-12px); }
+}
+
+/* Slow Ken Burns drift on the photo itself */
+@keyframes heroKenBurns {
+  0%   { transform: scale(1.05) translate(0, 0); }
+  100% { transform: scale(1.14) translate(-2%, -2.5%); }
+}
+
+/* Diagonal light sheen sweeping across the frame */
+@keyframes heroSheen {
+  0%   { transform: translateX(-130%) skewX(-18deg); opacity: 0; }
+  18%  { opacity: 0.55; }
+  40%  { transform: translateX(130%) skewX(-18deg); opacity: 0; }
+  100% { transform: translateX(130%) skewX(-18deg); opacity: 0; }
+}
+
+/* Floating glass info cards */
+@keyframes heroCardFloat {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-9px); }
+}
+
+/* Soft drifting decorative blob */
+@keyframes heroBlob {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(14px, -10px) scale(1.06); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-scene *, .hero-scene { animation: none !important; }
+}
+
 /* ── Reset ── */
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 
 body {
   font-family: 'Inter', system-ui, sans-serif;
-  background-color: var(--color-surface, #F7F9F7);
+  background-color: var(--color-surface, #F9F6F0);
   color: #1A2E1A;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

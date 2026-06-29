@@ -1,5 +1,5 @@
 "use client";
-import { X, ShoppingCart, Trash2, Package } from "lucide-react";
+import { X, ClipboardList, Trash2, Package } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useToast } from "@/context/ToastContext";
 import { useRouter } from "next/navigation";
@@ -30,8 +30,8 @@ export default function CartSidebar({ open, onClose }: Props) {
         {/* Header */}
         <div className="flex items-center justify-between p-5 border-b border-gray-100">
           <div className="flex items-center gap-2.5">
-            <ShoppingCart size={20} className="text-primary-500" />
-            <h2 className="font-bold text-lg">My Cart</h2>
+            <ClipboardList size={20} className="text-primary-500" />
+            <h2 className="font-bold text-lg">Order List</h2>
             {count > 0 && (
               <span className="bg-primary-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">{count}</span>
             )}
@@ -46,10 +46,10 @@ export default function CartSidebar({ open, onClose }: Props) {
           {items.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-full text-center gap-3">
               <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center">
-                <ShoppingCart size={32} className="text-gray-400" />
+                <Package size={32} className="text-gray-400" />
               </div>
-              <p className="font-semibold text-gray-700">Your cart is empty</p>
-              <p className="text-sm text-gray-400">Browse the marketplace to add fresh produce</p>
+              <p className="font-semibold text-gray-700">Your order list is empty</p>
+              <p className="text-sm text-gray-400">Source produce from verified farmers to start your order</p>
             </div>
           ) : (
             <div className="flex flex-col gap-3">
@@ -83,7 +83,7 @@ export default function CartSidebar({ open, onClose }: Props) {
                 <span className="font-semibold">₦{total.toLocaleString()}</span>
               </div>
               <div className="flex justify-between text-sm">
-                <span className="text-gray-500">Delivery fee</span>
+                <span className="text-gray-500">Logistics fee</span>
                 <span className="font-semibold">₦1,500</span>
               </div>
               <div className="flex justify-between font-bold text-base pt-2 border-t border-gray-200">
@@ -93,7 +93,7 @@ export default function CartSidebar({ open, onClose }: Props) {
             </div>
             <button onClick={goToCheckout} className="w-full flex items-center justify-center gap-2 py-3.5 bg-primary-500 hover:bg-primary-600 text-white font-bold rounded-xl transition-colors shadow-green">
               <Package size={18} />
-              Proceed to Checkout
+              Submit Order Request
             </button>
             <p className="text-[11px] text-gray-400 text-center mt-2 flex items-center justify-center gap-1">
               <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>

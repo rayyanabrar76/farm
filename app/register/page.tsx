@@ -34,7 +34,7 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen pt-[100px] flex items-center justify-center px-4 py-12 bg-surface">
+    <div className="min-h-screen pt-25 flex items-center justify-center px-4 py-12 bg-surface">
       <div className="w-full max-w-lg">
         {/* Card */}
         <div className="bg-white rounded-3xl shadow-card-hover overflow-hidden border border-gray-100">

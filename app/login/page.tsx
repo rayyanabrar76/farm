@@ -30,7 +30,7 @@ export default function LoginPage() {
     <div className="min-h-screen pt-[100px] flex bg-surface">
       {/* Left decorative panel — hidden on mobile */}
       <div className="hidden lg:flex flex-col justify-between flex-1 relative overflow-hidden p-12"
-        style={{ background: "linear-gradient(150deg, #071809 0%, #0E3317 45%, #1B5E28 100%)" }}
+        style={{ background: "linear-gradient(150deg, #071208 0%, #102E0B 45%, #1A5514 100%)" }}
       >
         <div className="hero-pattern absolute inset-0" />
         <div className="absolute top-0 right-0 w-80 h-80 rounded-full pointer-events-none"

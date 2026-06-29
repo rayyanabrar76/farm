@@ -117,12 +117,12 @@ export default function CheckoutPage() {
             <div className="w-20 h-20 bg-primary-50 rounded-full flex items-center justify-center mx-auto mb-4">
               <Package size={32} className="text-primary-300" />
             </div>
-            <h2 className="font-black text-xl text-gray-800 mb-2">Your cart is empty</h2>
-            <p className="text-gray-400 text-sm mb-6">Add some produce before checking out</p>
+            <h2 className="font-black text-xl text-gray-800 mb-2">Your order list is empty</h2>
+            <p className="text-gray-400 text-sm mb-6">Add produce to your order list before submitting</p>
             <Link href="/marketplace"
               className="inline-block px-6 py-3 rounded-xl text-white font-bold text-sm"
               style={{ background: "linear-gradient(135deg, #1B5E28, #4CAF72)" }}>
-              Browse Marketplace
+              Browse Supply Listings
             </Link>
           </div>
         </div>
@@ -139,10 +139,10 @@ export default function CheckoutPage() {
 
           {/* Back */}
           <Link href="/marketplace" className="inline-flex items-center gap-2 text-sm font-semibold text-gray-500 hover:text-primary-500 transition-colors mb-6">
-            <ArrowLeft size={15} /> Back to Marketplace
+            <ArrowLeft size={15} /> Back to Supply Listings
           </Link>
 
-          <h1 className="text-2xl font-black text-gray-900 mb-6">Checkout</h1>
+          <h1 className="text-2xl font-black text-gray-900 mb-6">Confirm Order Request</h1>
 
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
 

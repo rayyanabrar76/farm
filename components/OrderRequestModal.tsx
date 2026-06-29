@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { X, ShieldCheck, CheckCircle, Package, Phone, MapPin, MessageSquare, User, ChevronDown } from "lucide-react";
+import { useToast } from "@/context/ToastContext";
 import type { Product } from "@/lib/data";
 
 const NG_STATES = [
@@ -21,6 +22,7 @@ interface Props {
 type Step = "form" | "confirm";
 
 export default function OrderRequestModal({ open, onClose, product, qty: initialQty }: Props) {
+  const { showToast } = useToast();
   const [step, setStep] = useState<Step>("form");
   const [orderId] = useState(() => "AGR-" + Math.random().toString(36).slice(2, 8).toUpperCase());
   const [form, setForm] = useState({
@@ -50,7 +52,22 @@ export default function OrderRequestModal({ open, onClose, product, qty: initial
   };
 
   const handleSubmit = () => {
-    if (validate()) setStep("confirm");
+    if (!validate()) return;
+    // Mock submit — persist the request locally until a backend exists.
+    try {
+      const req = {
+        orderId,
+        produce: product.name,
+        farmer: product.farmer,
+        ...form,
+        submittedAt: new Date().toISOString(),
+      };
+      const key = "agrolync_order_requests";
+      const existing = JSON.parse(localStorage.getItem(key) || "[]");
+      localStorage.setItem(key, JSON.stringify([...existing, req]));
+    } catch { /* ignore storage errors */ }
+    showToast(`Request sent to ${product.farmer.split(" ")[0]}`, "success");
+    setStep("confirm");
   };
 
   const handleClose = () => {
@@ -75,7 +92,7 @@ export default function OrderRequestModal({ open, onClose, product, qty: initial
         <div className="flex items-center justify-between px-5 pt-5 pb-4 border-b border-gray-100 shrink-0">
           <div>
             <h2 className="font-black text-gray-900 text-lg">
-              {step === "form" ? "Place Order Request" : "Order Confirmed!"}
+              {step === "form" ? "Request this produce" : "Request Sent!"}
             </h2>
             <p className="text-xs text-gray-400 mt-0.5">
               {step === "form" ? `Ordering from ${product.farmer}` : `Order ID: ${orderId}`}
@@ -102,7 +119,7 @@ export default function OrderRequestModal({ open, onClose, product, qty: initial
                 <div className="flex-1 min-w-0">
                   <p className="font-bold text-gray-900 text-sm truncate">{product.name}</p>
                   <p className="text-xs text-gray-400">{product.farmer} · {product.state}</p>
-                  <p className="text-xs font-black text-primary-600 mt-0.5">₦{product.price.toLocaleString()}/{product.unit}</p>
+                  <p className="text-xs text-gray-400 mt-0.5">from ₦{product.price.toLocaleString()}/{product.unit}</p>
                 </div>
                 {product.verified && (
                   <div className="flex items-center gap-1 text-[10px] font-bold text-primary-500 shrink-0">
@@ -124,9 +141,9 @@ export default function OrderRequestModal({ open, onClose, product, qty: initial
                     <button onClick={() => set("qty", form.qty + product.minOrder)}
                       className="w-10 h-10 flex items-center justify-center hover:bg-gray-50 text-gray-600 border-l border-gray-200 font-bold text-lg transition-colors">+</button>
                   </div>
-                  <div className="flex-1 bg-primary-50 rounded-xl px-4 py-2.5">
-                    <p className="text-[10px] text-gray-400 font-medium">Order Total</p>
-                    <p className="font-black text-primary-600 text-base">₦{total.toLocaleString()}</p>
+                  <div className="flex-1 bg-gray-50 rounded-xl px-4 py-2.5">
+                    <p className="text-[10px] text-gray-400 font-medium">Est. value · no payment now</p>
+                    <p className="font-semibold text-gray-600 text-sm">₦{total.toLocaleString()}</p>
                   </div>
                 </div>
                 {errors.qty && <p className="text-red-500 text-xs mt-1">{errors.qty}</p>}
@@ -199,11 +216,11 @@ export default function OrderRequestModal({ open, onClose, product, qty: initial
                 </div>
               </div>
 
-              {/* Escrow note */}
-              <div className="flex items-start gap-2.5 bg-amber-50 border border-amber-100 rounded-xl p-3">
-                <ShieldCheck size={15} className="text-amber-600 shrink-0 mt-0.5" />
-                <p className="text-[11px] text-amber-800 leading-relaxed">
-                  Payment is held in <strong>secure escrow</strong> and only released to the farmer after you confirm delivery. 100% money-back on quality issues.
+              {/* No-payment request note */}
+              <div className="flex items-start gap-2.5 bg-primary-50 border border-primary-100 rounded-xl p-3">
+                <ShieldCheck size={15} className="text-primary-600 shrink-0 mt-0.5" />
+                <p className="text-[11px] text-primary-800 leading-relaxed">
+                  <strong>No payment now.</strong> Send your request and the farmer will reach out to confirm availability, pricing and delivery directly with you.
                 </p>
               </div>
             </div>
@@ -251,8 +268,8 @@ export default function OrderRequestModal({ open, onClose, product, qty: initial
                 <span className="font-semibold text-gray-900">{form.qty}{product.unit}</span>
               </div>
               <div className="flex justify-between text-sm">
-                <span className="text-gray-400">Total Value</span>
-                <span className="font-black text-primary-600">₦{total.toLocaleString()}</span>
+                <span className="text-gray-400">Est. value</span>
+                <span className="font-semibold text-gray-600">₦{total.toLocaleString()}</span>
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-gray-400">Delivery</span>

@@ -1,8 +1,8 @@
 "use client";
 import Link from "next/link";
-import { MapPin, ShoppingCart, ShieldCheck } from "lucide-react";
-import { useCart } from "@/context/CartContext";
-import { useToast } from "@/context/ToastContext";
+import { useState } from "react";
+import { MapPin, Package, ShieldCheck } from "lucide-react";
+import OrderRequestModal from "./OrderRequestModal";
 import type { Product } from "@/lib/data";
 
 interface Props { product: Product; }
@@ -17,26 +17,24 @@ const CARD_BG: Record<string, string> = {
 };
 
 export default function ProductCard({ product: p }: Props) {
-  const { addItem } = useCart();
-  const { showToast } = useToast();
+  const [requestOpen, setRequestOpen] = useState(false);
 
-  const handleAdd = (e: React.MouseEvent) => {
+  const handleRequest = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    addItem(p);
-    showToast(`${p.name} added to cart`, "success");
+    setRequestOpen(true);
   };
 
   return (
-    <div className="flex flex-col">
-      {/* Image area */}
-      <Link href={`/marketplace/${p.id}`} className="group block relative rounded-2xl overflow-hidden mb-2 sm:mb-3"
-        style={{ aspectRatio: "3/4", background: CARD_BG[p.category] ?? CARD_BG.Vegetables }}>
+    <div className="flex flex-col group">
+      {/* Image area — editorial, larger */}
+      <Link href={`/marketplace/${p.id}`} className="block relative rounded-2xl overflow-hidden mb-3 sm:mb-4"
+        style={{ aspectRatio: "4/5", background: CARD_BG[p.category] ?? CARD_BG.Vegetables }}>
 
-        {/* Badge — top left */}
+        {/* Crop badge — top left */}
         {p.badge && (
-          <div className="absolute top-2 left-2 sm:top-3 sm:left-3 z-10">
-            <span className="text-[10px] sm:text-[11px] font-bold text-white bg-black/35 backdrop-blur-md px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full border border-white/12">
+          <div className="absolute top-3 left-3 z-10">
+            <span className="text-[10px] sm:text-[11px] font-bold text-white bg-black/35 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/12">
               {p.badge}
             </span>
           </div>
@@ -44,8 +42,9 @@ export default function ProductCard({ product: p }: Props) {
 
         {/* Verified — top right */}
         {p.verified && (
-          <div className="absolute top-2 right-2 sm:top-3 sm:right-3 z-10 flex items-center gap-1 text-[9px] sm:text-[10px] font-bold text-white bg-primary-600/70 backdrop-blur-md px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full">
-            <ShieldCheck size={8} /> <span className="hidden xs:inline">Verified</span>
+          <div className="absolute top-3 right-3 z-10 flex items-center gap-1 text-[9px] sm:text-[10px] font-bold text-white backdrop-blur-md px-2 py-1 rounded-full"
+            style={{ background: "rgba(26,85,20,0.72)" }}>
+            <ShieldCheck size={9} /> <span className="hidden xs:inline">Verified</span>
           </div>
         )}
 
@@ -53,44 +52,60 @@ export default function ProductCard({ product: p }: Props) {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={p.img}
-          alt={p.name}
+          alt={`${p.name} — grown by ${p.farmer} in ${p.state}`}
           className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
           onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
         />
 
-        {/* Mobile: always-visible cart button (bottom-right corner) */}
+        {/* Mobile: always-visible request button (bottom-right corner) */}
         <button
-          onClick={handleAdd}
-          className="sm:hidden absolute bottom-2 right-2 z-10 w-8 h-8 rounded-full bg-white shadow-lg flex items-center justify-center text-gray-900 hover:bg-accent-400 transition-colors"
-          aria-label="Add to cart"
+          onClick={handleRequest}
+          className="sm:hidden absolute bottom-3 right-3 z-10 w-9 h-9 rounded-full bg-white shadow-lg flex items-center justify-center text-primary-700 hover:bg-primary-50 transition-colors"
+          aria-label="Request this produce"
         >
-          <ShoppingCart size={13} />
+          <Package size={14} />
         </button>
 
-        {/* Desktop: hover-reveal Add to Cart bar */}
+        {/* Desktop: hover-reveal Request bar */}
         <div className="hidden sm:block absolute bottom-0 inset-x-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 p-3"
-          style={{ background: "linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 100%)" }}>
+          style={{ background: "linear-gradient(to top, rgba(7,18,8,0.78) 0%, transparent 100%)" }}>
           <button
-            onClick={handleAdd}
-            className="w-full py-2.5 rounded-xl bg-white text-gray-900 font-bold text-xs flex items-center justify-center gap-1.5 hover:bg-accent-400 transition-colors"
+            onClick={handleRequest}
+            className="w-full py-2.5 rounded-xl bg-white text-primary-700 font-bold text-xs flex items-center justify-center gap-1.5 hover:bg-primary-50 transition-colors"
           >
-            <ShoppingCart size={13} /> Add to Cart
+            <Package size={13} /> Request this produce
           </button>
         </div>
       </Link>
 
-      {/* Info */}
+      {/* Info — crop + farm emphasized, price muted */}
       <Link href={`/marketplace/${p.id}`} className="block px-0.5">
-        <h3 className="font-bold text-gray-900 text-xs sm:text-sm leading-tight line-clamp-1">{p.name}</h3>
-        <p className="text-gray-400 text-[10px] sm:text-xs mt-0.5 flex items-center gap-1 truncate">
-          <MapPin size={9} className="shrink-0" />
+        <h3 className="font-bold text-gray-900 text-sm sm:text-base leading-snug line-clamp-1">{p.name}</h3>
+        <p className="text-primary-700 text-xs sm:text-sm font-semibold mt-1 flex items-center gap-1.5 truncate">
+          <MapPin size={12} className="shrink-0 text-primary-500" />
           {p.farmer} · {p.state}
         </p>
-        <p className="font-black text-gray-900 text-sm sm:text-base mt-1">
-          ₦{p.price.toLocaleString()}
-          <span className="text-gray-400 font-normal text-[10px] sm:text-xs ml-0.5">/{p.unit}</span>
-        </p>
+        <div className="flex items-center justify-between mt-2.5 gap-2">
+          <p className="text-gray-500 text-xs sm:text-sm">
+            <span className="text-gray-400">from</span>{" "}
+            <span className="font-semibold text-gray-600">₦{p.price.toLocaleString()}</span>
+            <span className="text-gray-400">/{p.unit}</span>
+          </p>
+          {p.quality && (
+            <span className="text-[10px] font-semibold text-primary-600 bg-primary-50 px-2 py-0.5 rounded-full shrink-0">
+              {p.quality}
+            </span>
+          )}
+        </div>
       </Link>
+
+      {/* Order request flow (replaces cart) */}
+      <OrderRequestModal
+        open={requestOpen}
+        onClose={() => setRequestOpen(false)}
+        product={p}
+        qty={p.minOrder}
+      />
     </div>
   );
 }

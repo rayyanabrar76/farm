@@ -1,15 +1,15 @@
 "use client";
 import { useState } from "react";
-import { Plus, TrendingUp, TrendingDown, Package, DollarSign, Star, Leaf, Bell, CheckCircle, Eye, Edit3, Trash2, Hand, X } from "lucide-react";
+import { Plus, TrendingUp, TrendingDown, Package, DollarSign, Star, Leaf, Bell, CheckCircle, Eye, Edit3, Trash2, X } from "lucide-react";
 import AddListingModal from "@/components/AddListingModal";
 import { useToast } from "@/context/ToastContext";
 
 const KPIs = [
-  { label: "Monthly Earnings", value: "₦384,500", change: "+23%", trend: "up", icon: DollarSign, color: "from-primary-500 to-primary-400" },
-  { label: "Active Orders", value: "7", change: "+2 today", trend: "up", icon: Package, color: "from-blue-500 to-blue-400" },
-  { label: "Listed Produce", value: "4", change: "2,100 kg total", trend: "neutral", icon: Leaf, color: "from-teal-500 to-teal-400" },
+  { label: "Monthly Earnings", value: "₦384,500", change: "+23%", trend: "up", icon: DollarSign, color: "from-primary-600 to-primary-400" },
+  { label: "Active Orders", value: "7", change: "+2 today", trend: "up", icon: Package, color: "from-primary-800 to-primary-600" },
+  { label: "Listed Produce", value: "4", change: "2,100 kg total", trend: "neutral", icon: Leaf, color: "from-primary-500 to-primary-300" },
   { label: "Farmer Rating", value: "4.8", change: "Top 5% on platform", trend: "up", icon: Star, color: "from-accent-500 to-accent-400" },
-  { label: "Waste Reduction", value: "91%", change: "vs 52% before", trend: "up", icon: TrendingUp, color: "from-green-500 to-green-400" },
+  { label: "Waste Reduction", value: "91%", change: "vs 52% before", trend: "up", icon: TrendingUp, color: "from-primary-700 to-primary-500" },
 ];
 
 const MY_LISTINGS = [
@@ -45,15 +45,15 @@ const SALES_BARS = [
 const ACTIVITY = [
   { dot: "bg-accent-500", text: "New buyer inquiry on your Tomato listing", time: "5 minutes ago" },
   { dot: "bg-primary-500", text: "₦85,000 payment confirmed — Maize order #2847", time: "2 hours ago" },
-  { dot: "bg-blue-400", text: "New 5-star review from Chidi Restaurants", time: "Yesterday 14:30" },
-  { dot: "bg-primary-400", text: "Tomato price alert: market rate up to ₦410/kg", time: "Yesterday 09:00" },
-  { dot: "bg-green-400", text: "Profile verified — Tier 2 farmer badge earned", time: "3 days ago" },
+  { dot: "bg-primary-400", text: "New 5-star review from Chidi Restaurants", time: "Yesterday 14:30" },
+  { dot: "bg-accent-400", text: "Tomato price alert: market rate up to ₦410/kg", time: "Yesterday 09:00" },
+  { dot: "bg-primary-300", text: "Profile verified — Tier 2 farmer badge earned", time: "3 days ago" },
 ];
 
 const STATUS_STYLES = {
   pending:   "bg-amber-100 text-amber-700",
-  confirmed: "bg-green-100 text-green-700",
-  delivered: "bg-blue-100 text-blue-700",
+  confirmed: "bg-primary-100 text-primary-700",
+  delivered: "bg-gray-100 text-gray-600",
 };
 const STOCK_DOT = { ok: "bg-green-500", low: "bg-amber-400", out: "bg-red-400" };
 const STOCK_LABEL = { ok: "In Stock", low: "Low Stock", out: "Out of Stock" };
@@ -85,9 +85,9 @@ export default function DashboardPage() {
 
   return (
     <>
-      <div className="pt-25 min-h-screen" style={{ background: "#F4F7F4" }}>
+      <div className="pt-25 min-h-screen" style={{ background: "#F9F6F0" }}>
         {/* Dashboard header band */}
-        <div className="relative overflow-hidden px-4 py-8" style={{ background: "linear-gradient(135deg, #0E3317 0%, #1B5E28 60%, #2D7A3A 100%)" }}>
+        <div className="relative overflow-hidden px-4 py-10" style={{ background: "linear-gradient(135deg, #071208 0%, #1A5514 60%, #2D7A3A 100%)" }}>
           <div className="hero-pattern absolute inset-0 pointer-events-none" />
           <div className="absolute top-0 right-0 w-64 h-64 rounded-full pointer-events-none"
             style={{ background: "radial-gradient(circle, rgba(245,166,35,0.08) 0%, transparent 70%)" }} />
@@ -275,7 +275,7 @@ export default function DashboardPage() {
                       <span className="text-sm font-semibold text-gray-700">{p.name}</span>
                       <div className="flex items-center gap-2">
                         <span className="text-sm font-bold text-gray-900">₦{p.price}/kg</span>
-                        <div className={`flex items-center gap-0.5 text-[10px] font-bold px-2 py-0.5 rounded-full ${p.trend === "up" ? "bg-green-100 text-green-600" : "bg-red-100 text-red-500"}`}>
+                        <div className={`flex items-center gap-0.5 text-[10px] font-bold px-2 py-0.5 rounded-full ${p.trend === "up" ? "bg-primary-100 text-primary-700" : "bg-gray-100 text-gray-500"}`}>
                           {p.trend === "up" ? <TrendingUp size={10} /> : <TrendingDown size={10} />}
                           {p.change}%
                         </div>
