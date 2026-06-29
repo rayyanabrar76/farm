@@ -30,7 +30,7 @@ export default function ImpactStats() {
         <div className="max-w-xl mb-10 sm:mb-12">
           <p className="text-[11px] font-black tracking-[0.25em] text-primary-600 uppercase mb-3">Our impact</p>
           <h2 className="text-3xl sm:text-4xl font-black text-gray-900 leading-tight">
-            Aggregating Africa&apos;s harvest at scale
+            Aggregating harvests at scale
           </h2>
         </div>
 

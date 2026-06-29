@@ -29,7 +29,7 @@ export default function PartnersSection() {
           <Diamond className="w-1.5 h-1.5 opacity-70" />
         </p>
         <h2 className="font-serif text-[clamp(1.5rem,4vw,2.5rem)] leading-tight text-[#0E2A12] max-w-2xl mx-auto">
-          Trusted by Africa&apos;s leading agribusinesses
+          Trusted by leading agribusinesses
         </h2>
       </div>
 

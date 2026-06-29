@@ -31,7 +31,7 @@ export default function HomeHero() {
             </h1>
 
             <p className="text-gray-500 text-lg sm:text-xl leading-relaxed mt-6 max-w-lg">
-              Agrolync links Africa&apos;s farmers and vendors to buyers worldwide on one
+              Agrolync links farmers and vendors to buyers worldwide on one
               trusted network — fair prices, verified trade, delivered end to end.
             </p>
 

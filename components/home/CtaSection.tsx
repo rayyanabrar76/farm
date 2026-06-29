@@ -47,8 +47,8 @@ export default function CtaSection() {
           </span>
 
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-white leading-[1.03] tracking-tight">
-            Transform How Africa<br />
-            Trades Its <span className="gradient-text">Harvest</span>
+            Transform How Farmers<br />
+            Trade Their <span className="gradient-text">Harvest</span>
           </h2>
 
           <p className="text-white/60 text-base sm:text-lg mt-5 mb-9 max-w-xl mx-auto leading-relaxed">
