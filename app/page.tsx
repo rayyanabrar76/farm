@@ -4,7 +4,6 @@ import ImpactStats from "@/components/home/ImpactStats";
 import PersonaShowcase from "@/components/PersonaShowcase";
 import PartnersSection from "@/components/home/PartnersSection";
 import InstagramSection from "@/components/home/InstagramSection";
-import GetAppSection from "@/components/home/GetAppSection";
 import CtaSection from "@/components/home/CtaSection";
 import Footer from "@/components/Footer";
 
@@ -15,9 +14,8 @@ export default function HomePage() {
       <WhoForSection />
       <ImpactStats />
       <PersonaShowcase />
-      <PartnersSection />
       <InstagramSection />
-      <GetAppSection />
+       <PartnersSection />
       <CtaSection />
       <Footer />
     </>

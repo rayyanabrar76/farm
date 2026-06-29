@@ -171,13 +171,7 @@ export default function RegisterPage() {
               <Link href="/login" className="text-primary-500 font-semibold hover:underline">Login here</Link>
             </p>
 
-            <div className="mt-5 p-4 bg-gray-50 rounded-xl text-center">
-              <p className="text-xs text-gray-400 mb-2">No smartphone? No problem.</p>
-              <p className="text-sm font-black text-primary-500 tracking-wider">Dial *347# on any phone</p>
-              <p className="text-[10px] text-gray-400 mt-1">USSD service — works without internet or data</p>
-            </div>
-
-            <p className="text-center text-[11px] text-gray-300 mt-4">
+            <p className="text-center text-[11px] text-gray-300 mt-5">
               By signing up you agree to our{" "}
               <Link href="#" className="underline">Terms</Link> and{" "}
               <Link href="#" className="underline">Privacy Policy</Link>.

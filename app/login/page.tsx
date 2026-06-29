@@ -134,18 +134,6 @@ export default function LoginPage() {
                 Don&apos;t have an account?{" "}
                 <Link href="/register" className="text-primary-500 font-semibold hover:underline">Sign up free</Link>
               </p>
-
-              {/* USSD divider */}
-              <div className="relative my-6">
-                <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-gray-100" /></div>
-                <div className="relative flex justify-center"><span className="bg-white px-3 text-xs text-gray-400">or login without internet</span></div>
-              </div>
-
-              <div className="text-center bg-primary-50 rounded-2xl p-5">
-                <p className="text-xs text-gray-400 mb-1.5">No smartphone or data? Use USSD</p>
-                <p className="text-2xl font-black text-primary-500 tracking-widest">*347#</p>
-                <p className="text-[10px] text-gray-400 mt-1.5">Works on any mobile network · No internet required</p>
-              </div>
             </div>
           </div>
         </div>
